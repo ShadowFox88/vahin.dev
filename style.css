@@ -20,14 +20,19 @@ header ul {
 
 header ul li {
   float: left;
-}
-
-header ul li a {
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 14px 14px;
   text-decoration: none;
+}
+
+header a {
+  display: inline-block;
+  width: auto;
+  height: 0;
+  text-decoration: none;
+  color: darkcyan;
 }
 
 header ul li a:hover {
@@ -58,13 +63,12 @@ footer {
 
 .friends {
   float: right;
+  right: 8px;
   background-color: #333333;
   border: 10px solid #333333;
-  /* border-bottom: 5px; */
   border-radius: 5px;
-  width: 13%;
-  white-space: nowrap;
-  overflow-x: auto;
+  height: 40px;
+  width: auto;
 }
 
 .friends-icon {
