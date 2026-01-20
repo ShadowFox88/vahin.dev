@@ -1,8 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
 
+:root {
+  --bg-color: black;
+  --text-color: hsl(210, 10%, 62%);
+  --link-color: darkcyan;
+  --header-hover-bg: rgb(0,33,71);
+  --dark-mode-button: white;
+  --friends-background: #333333;
+}
+
+
 body {
-  background-color: black;
-  color: hsl(210, 10%, 62%);
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-family: "Google Sans Code", monospace;
   font-optical-sizing: auto;
   font-weight: 500;
@@ -21,7 +31,7 @@ header ul {
 header ul li {
   float: left;
   display: block;
-  color: white;
+  color: var(--link-color);
   text-align: center;
   padding: 14px 14px;
   text-decoration: none;
@@ -32,11 +42,11 @@ header a {
   width: auto;
   height: 0;
   text-decoration: none;
-  color: darkcyan;
+  color: var(--link-color);
 }
 
-header ul li a:hover {
-  background-color: rgb(0,33,71);
+header ul li:hover {
+  background-color: var(--header-hover-bg);
 }
 
 footer {
@@ -64,8 +74,8 @@ footer {
 .friends {
   float: right;
   right: 8px;
-  background-color: #333333;
-  border: 10px solid #333333;
+  background-color: var(--friends-background);
+  border: 10px solid var(--friends-background);
   border-radius: 5px;
   height: 40px;
   width: auto;
@@ -75,4 +85,14 @@ footer {
   margin: 0.5%;
   display: inline-block;
   border-radius: 5px;
+}
+
+#dark-mode-toggle {
+  cursor: pointer;
+  float: right;
+  margin: 10px;
+  margin-left: 20px;
+  border: 5px solid var(--dark-mode-button);
+  border-radius: 5px;
+  background-color: var(--dark-mode-button);
 }
