@@ -1,12 +1,16 @@
-let darkMode = true;
-
 window.addEventListener("DOMContentLoaded", (event) => {
-
+    if (sessionStorage.getItem("darkMode") === null) {
+        sessionStorage.setItem("darkMode", 'false');
+    }
+    sessionStorage.setItem("darkMode", !(sessionStorage.getItem("darkMode") === 'true'));
+    toggleDarkMode();
 });
 
 function toggleDarkMode() {
-    darkMode = !darkMode;
-    button = document.getElementById("dark-mode-toggle");
+    darkMode = sessionStorage.getItem("darkMode") === 'true';
+    sessionStorage.setItem("darkMode", !darkMode);
+    button = document.getElementsByClassName("dark-mode-toggle")[0];
+
     if (darkMode) {
         document.documentElement.style.setProperty('--bg-color', 'black');
         document.documentElement.style.setProperty('--text-color', 'hsl(210, 10%, 62%)');
@@ -26,4 +30,4 @@ function toggleDarkMode() {
 
         button.src = "icons/moon.svg";
     }
-} 
+}
