@@ -87,7 +87,15 @@ footer {
   border-radius: 5px;
 }
 
-#dark-mode-toggle {
+.project {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.dark-mode-toggle {
   cursor: pointer;
   float: right;
   margin: 10px;
@@ -96,3 +104,8 @@ footer {
   border-radius: 5px;
   background-color: var(--dark-mode-button);
 }
+
+#prev-button {
+  margin-left: 10px;
+}
+

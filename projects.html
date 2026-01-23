@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Vahin's Site</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <img src="icons/sun.svg" alt="Toggle Dark Mode" width="24" height="24" class="dark-mode-toggle" onClick="toggleDarkMode()"/>
+
+    </header>
+
+    <main>
+        <div style="display: flex; align-items: center;">
+            <h1>Projects</h1>
+            <img src="icons/left-arrow.svg" alt="Show Previous Project" id="prev-button" width="40" height="40" onClick="showPreviousProject()"/>
+            <img src="icons/right-arrow.svg" alt="Show Next Project" id="next-button" width="40" height="40" onClick="showNextProject()"/>
+        </div>
+
+        <div class="project">
+            <h3>Lamna 2024 - Present</h3>
+            <p>A privacy-first, self-hostable chat app built as a hobby project, focused on encryption, user control, and data ownership.</p>
+        </div>
+
+        <div class="project">
+            <h3>Aetheris 2025 - 2025</h3>
+            <p>An abandoned project to make a file sharing API in python to learn API design and litestar.</p>
+        </div>
+
+        <div class="project">
+            <h3>Xeno 2020 - 2024</h3>
+            <p>A highly customisable all-purpose discord bot. Features included giveaways, moderation, utility and fun commands.</p>
+        </div>
+
+    </main>
+
+    <footer>
+        <p> &copy; 2026 Vahin Mehra</p>
+
+    </footer>
+</body>
+
+<script src="projects.js"></script>
+<script src="script.js"></script>
+
+</html>
