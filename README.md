@@ -1,44 +1,75 @@
-# CSS Starter Template
+# React + TypeScript + Vite
 
-Looking for a basic website template that includes Hack Club's theme CSS? Look no further!
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## How it works
+Currently, two official plugins are available:
 
-This is a blank repository all set up for you to start your own website. We include [Hack Club's theme](https://css.hackclub.com/) [CSS](theme.css) for you to use if you wish.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-1. [Create a copy](https://github.com/hackclub/css-starter/generate) of this template repository and name it `css-starter`
-1. Download or clone your new repository by clicking the green `Code` button
-   - For downloading, click `Download Zip`. Drag that file to your desktop, open your terminal, and navigate to the file in your terminal:
-      - Mac: `cd ~/Desktop/css-starter`
-      - Windows: `cd C:\Users\%USERNAME%\Desktop\css-starter`
-   - For cloning on the command line, copy the URL they provide and type into your command line `git clone <URL> && cd css-starter` into your terminal, replacing <URL> with the URL you copied
-1. Start server
-   - `python -m SimpleHTTPServer`
-1. View your server
-   - `open http://localhost:8000/`
-1. Write your code and refresh to see the changes
-1. Deploy your website to the internet!
-   - We recommend [Vercel](https://vercel.com/docs/get-started), it's an simple and free way to get your website up quickly.
-   - To use Vercel go to [vercel.com](https://vercel.com/)
-      - Create an account by authenticating your GitHub account with Vercel
-      - Click `New project` on your dashboard
-      - Select your `css-starter` GitHub repository
-      - Add your project name and click `Deploy`
-      - Click the `Visit` button to see your website!
+## React Compiler
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fhackclub%2Fcss-starter) [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/hackclub/css-starter)
+The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
 
+Note: This will impact Vite dev & build performances.
 
-## Theme examples
+## Expanding the ESLint configuration
 
-Want to use our theme but don't know where to start? Check out:
-  - View our theme elements [here](https://css.hackclub.com/)
-  - View our theme code and documentation [here](https://github.com/hackclub/css)
-  - View a static example of a site using our theme [here](https://contribute.hackclub.com/) and its code [here](https://github.com/hackclub/contribute)
-  - Join the <a href="https://hackclub.com/slack/">Hack Club Slack</a> and ask community members how they're using the theme!
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## Contributing
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-Contributions are encouraged and welcome! Feel free to submit a pull request with code changes, or open issues for suggestions or bug reports.
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-Development chatter happens in the [#hackclub-site-dev](https://app.slack.com/client/T0266FRGM/C036BTDGP43) channel in the [Hack Club Slack](https://hackclub.com/slack/).
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
