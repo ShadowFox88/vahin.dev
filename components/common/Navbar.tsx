@@ -4,9 +4,9 @@ export default function Navbar() {
     const pages = ["Home", "Blog", "Contact"];
 
     return (
-        <header className="inline-block">
-            <ul className="list-none">
-                {pages.map(_=><li key={_} className="block float-left mr-10 p-20 bg-white">{_}</li>)}
+        <header className="inline-block p-10 font-[Google_Sans_Code]">
+            <ul className="list-none m-0 block">
+                {Object.keys(pages).map(index=><li key={pages[Number(index)]} className="block float-left p-5 text-cyan-700 hover:bg-navbar-link-background">{pages[Number(index)]}</li>)}
             </ul>
         </header>
     )
