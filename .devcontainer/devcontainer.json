@@ -23,8 +23,8 @@
 			"onAutoForward": "openPreview"
 		}
 	},
-	"updateContentCommand": "npm install",
-	"postAttachCommand": "npm run dev",
+	"updateContentCommand": "bun install",
+	"postAttachCommand": "bun run dev",
 	// Configure tool-specific properties.
 	"customizations": {
 		"codespaces": {
