@@ -1,10 +1,17 @@
 import Page from "../common/Page";
+import LoremIpsum from "../common/LoremIpsum";
 
 export default async function HomePage() {
-  return (
+    return (
         <Page>
-            <p className="font-bold text-3xl mb-8">Vahin's Website</p>
-            <p>Hi, I'm Vahin, a 17 year old software developer with delusions of grandeur</p>
+            <p>
+                Hi, I'm Vahin, a 17 year old software developer with delusions of
+                grandeur
+            </p>
+
+            <br />
+            <br />
+            <LoremIpsum paragraphs={20} />
         </Page>
-  );
+    );
 }

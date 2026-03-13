@@ -16,31 +16,26 @@ export const metadata: Metadata = {
         "My personal site.",
 };
 
-const google_sans_code = Google_Sans_Code({
+const GoogleSansCode = Google_Sans_Code({
     subsets: ['latin'],
     weight: ['400', '700'],
     variable: '--font-google_sans_code'
 })
 
-export default function RootLayout({
+export default function Layout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
-        <>
-
-            <Navbar />
-
-            <html lang="en">
+        <html>
+            <body className={`px-6 antialiased max-w-5xl mx-auto bg-zinc-900 ${GoogleSansCode.className}`}>
+                <Navbar />
                 
-
-                <body className="antialiased">{children}</body>
-
-            </html>
-
-            <Footer />
-
-        </>
+                <div className= "py-5">{children}</div>
+                
+                <Footer />
+            </body>
+        </html>
     );
 }

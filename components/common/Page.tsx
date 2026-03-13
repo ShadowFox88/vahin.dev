@@ -8,7 +8,7 @@ type Props = {
 
 export default function Page({ children }: Props) {
     return (
-        <div className="p-10 font-[Google_Sans_Code]">
+        <div>
             {children}
         </div>
     );
