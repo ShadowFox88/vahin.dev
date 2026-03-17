@@ -1,13 +1,16 @@
+import clsx from 'clsx';
+
 type Props = {
-    command: string
+    command: string,
+    className?: string,
 }
 
-export default function Command({ command }: Props) {
+export default function Command({ command, className }: Props) {
+    // className = className?.split(" ").filter(Boolean).map(_ => "!" + _).join(" ")
 
     return (
-        <p className="-ml-5 text-gray-300 opacity-75">
+        <div className={clsx("text-neutral-500 opacity-75", className)}>
             <span className="text-purple-500">$</span> {command}
-        </p>
+        </div>
     );
-
 }

@@ -33,7 +33,7 @@ export default function LoremIpsum({paragraphs}: Props) {
     }
 
     return (
-        <div>
+        <div className="text-2xs">
             {output.split('\n').map((item, i) => <p key={i}>{item}</p>)}
         </div>
     )
