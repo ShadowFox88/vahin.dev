@@ -28,13 +28,18 @@ export default function Layout({
     children: React.ReactNode;
 }>) {
     return (
-        <html>
+        <html className="min-h-dvh min-w-dvh">
             <body className={`px-6 antialiased max-w-5xl mx-auto bg-zinc-900 ${GoogleSansCode.className}`}>
                 <Navbar />
                 
                 <div className= "py-5">{children}</div>
+
+                <div className= "">
+                    <p className="grow" />
+
+                    <Footer />
+                </div>
                 
-                <Footer />
             </body>
         </html>
     );

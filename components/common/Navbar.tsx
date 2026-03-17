@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
-    const pages = ["Home", "Blog", "Contact", "Quick Links"];
+    const pages = ["[ home ]", "[ blog ]", "[ contact ]", "[ quick links ]"];
     const paths = ["/", "/blog", "/contact", "/links"];
     const numbers = Object.keys(pages).map((index: string) => Number(index))
     const blueIndex = paths.indexOf(usePathname())
@@ -11,13 +11,13 @@ export default function Navbar() {
     
 
     return (
-        <div className="pt-10 pb-5 flex  sticky top-0 bg-background max-w-5xl mx-auto">
-            <p className="block float-left top-0 text-cyan-700 font-bold">Vahin Mehra</p>
+        <div className="pt-10 pb-5 flex sticky top-0 bg-background max-w-5xl mx-auto">
+            <p className="block float-left top-0 text-cyan-700 font-bold">[ Vahin ]</p>
             <ul className="list-none m-0 absolute right-0">
                 {numbers.map((index: number) => (
                     <li 
                     key={pages[index]} 
-                    className="block float-left p-5 -mt-5">
+                    className="block float-left p-5 pl-1 pr-1 -mt-5">
                     
                     {
                         <a
