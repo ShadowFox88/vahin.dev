@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #18181b;
-  --foreground: white;
+  --background: oklch(0.141 0.005 285.823);
+  --foreground: oklch(0.87 0.065 274.039);
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-navbar-link-background: rgb(0,33,71);
