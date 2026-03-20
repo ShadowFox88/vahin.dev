@@ -8,7 +8,7 @@ export default function Friends() {
                         {friend.image}
 
                         <div className="block">
-                            <p className="text-xs uppercase tracking-wider">aa</p>
+                            <p className="text-xs uppercase tracking-wider">friend</p>
                             <p className="text-sm text-purple-400">{friend.name}</p>
                             <p className="text-xs">@{friend.githubUsername}</p>
                         </div>

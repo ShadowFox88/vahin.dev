@@ -35,7 +35,7 @@ export default function Layout({
 }>) {
     return (
         <html>
-            <body className={`px-6 antialiased max-w-5xl relative mx-auto ${GeistMono.className}`}>
+            <body className={`px-6 antialiased max-w-3xl relative mx-auto ${GeistMono.className}`}>
                 <div className="flex flex-col min-h-screen">
                     <Navbar />
                     <main className="py-5 font-mono">{children}</main>

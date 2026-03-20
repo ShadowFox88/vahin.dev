@@ -10,21 +10,21 @@ export default function Navbar() {
     const blueIndex = paths.indexOf(usePathname())
 
     return (
-        <div>
-            <div className="pt-10 pb-5 flex flex-row sticky top-0 max-w-5xl mx-auto">
+        <div className="sticky top-0 bg-background max-w-5xl -ml-5 z-10">
+            <div className="pt-10 pb-5 flex flex-row mx-auto max-w-3xl">
                 <p className="block float-left top-0 text-cyan-700 font-bold">[ Vahin ]</p>
                 <ul className="list-none m-0 absolute right-0">
                     {numbers.map((index: number) => (
-                        <li 
-                        key={pages[index]} 
-                        className="block float-left p-5 pl-1 pr-1 -mt-5">
-                        
-                        {
-                            <Link
-                            className={`hover:text-cyan-900 ${blueIndex == index ? `text-cyan-500` : ""} transition-all duration-200`}
-                            href={paths[index]}
-                            >{pages[index]}</Link>
-                        }
+                        <li
+                            key={pages[index]}
+                            className="block float-left p-5 pl-1 pr-1 -mt-5">
+
+                            {
+                                <Link
+                                    className={`hover:text-lime-400/75 ${blueIndex == index ? `text-cyan-500` : ""} transition-all duration-200`}
+                                    href={paths[index]}
+                                >{pages[index]}</Link>
+                            }
 
                         </li>
                     ))}
