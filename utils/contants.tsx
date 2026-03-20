@@ -1,27 +1,30 @@
 import Image from 'next/image'
+
 import dep_avatar from "@/images/dep-avatar.jpg"
 import willi_avatar from "@/images/willi-avatar.jpg"
 import ducki_avatar from "@/images/ducki-avatar.jpg"
+
+import discord from "@/icons/discord.svg"
+import github from "@/icons/github.svg"
+import gmail from "@/icons/gmail.svg"
 
 export const SOCIALS: { name: string; href: string; icon: React.ReactNode }[] = [
     {
         name: "Discord",
         href: "https://discord.com/users/606648465065246750",
-        icon: <Image />,
+        icon: <Image src={discord.src} width="60" height="60" alt="profile_pic" className="mr-2"/>,
     },
     {
         name: "GitHub",
         href: "https://github.com/ShadowFox88",
-        icon: <Image />,
+        icon: <Image src={github.src} width="60" height="60" alt="profile_pic" className="mr-2"/>,
     },
     {
         name: "Email",
         href: "mailto:vahin@vahin.dev",
-        icon: <Image />,
+        icon: <Image src={gmail.src} width="60" height="60" alt="profile_pic" className="mr-2"/>,
     },
 ];
-
-
 
 export const FRIENDS = [
     {

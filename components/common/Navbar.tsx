@@ -21,7 +21,7 @@ export default function Navbar() {
                         
                         {
                             <Link
-                            className={`hover:text-cyan-900 ${blueIndex == index ? `text-cyan-500` : ""}`}
+                            className={`hover:text-cyan-900 ${blueIndex == index ? `text-cyan-500` : ""} transition-all duration-200`}
                             href={paths[index]}
                             >{pages[index]}</Link>
                         }

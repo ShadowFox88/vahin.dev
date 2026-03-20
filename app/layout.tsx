@@ -2,8 +2,8 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 
-import { Google_Sans_Code } from 'next/font/google';
 import { Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google"
 
 import Navbar from "@/components/common/Navbar"
 import Footer from "@/components/common/Footer"
@@ -17,18 +17,16 @@ export const metadata: Metadata = {
         "My personal site.",
 };
 
-const GeistMono = Geist_Mono({
-    subsets: ['latin'],
-    weight: ['400', '700'],
-    variable: '--font-geist_mono'
-})
+const GeistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
 
-const GoogleSansCode = Google_Sans_Code({
-    subsets: ['latin'],
-    weight: ['300'],
-    variable: '--font-google_sans_code',
-    adjustFontFallback: false
-})
+
+const GeistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export default function Layout({
     children,
@@ -37,10 +35,10 @@ export default function Layout({
 }>) {
     return (
         <html>
-            <body className={`px-6 antialiased max-w-5xl relative mx-auto ${GoogleSansCode.className}`}>
+            <body className={`px-6 antialiased max-w-5xl relative mx-auto ${GeistMono.className}`}>
                 <div className="flex flex-col min-h-screen">
                     <Navbar />
-                    <div className="py-5">{children}</div>
+                    <main className="py-5 font-mono">{children}</main>
                     <p className="grow"></p>
                     <Footer />
                 </div>
