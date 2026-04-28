@@ -14,7 +14,7 @@ export default async function HomePage() {
                         width={94}
                         height={94}
                         src={avatar.src}
-                        quality={100}
+                        quality={75}
                         alt="profile pic"
                         className="mr-5"
                     />
