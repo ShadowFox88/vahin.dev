@@ -7,6 +7,7 @@ import { Geist } from "next/font/google"
 
 import Navbar from "@/components/common/Navbar"
 import Footer from "@/components/common/Footer"
+import Background from "@/components/common/Background";
 
 export const metadata: Metadata = {
     title: {
@@ -35,8 +36,9 @@ export default function Layout({
 }>) {
     return (
         <html>
-            <body className={`px-6 antialiased max-w-3xl relative mx-auto ${GeistMono.className}`}>
-                <div className="flex flex-col min-h-screen">
+            <body>
+                <Background />
+                <div className={`flex flex-col min-h-screen px-6 antialiased max-w-3xl relative mx-auto ${GeistMono.className}`}>
                     <Navbar />
                     <main className="py-5 font-mono">{children}</main>
                     <p className="grow"></p>
