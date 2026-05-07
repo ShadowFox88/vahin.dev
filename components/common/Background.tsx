@@ -97,10 +97,12 @@ export default function Background() {
         return () => window.removeEventListener("resize", resize);
     }, []);
 
-    return <div className="max-h-screen overflow-hidden absolute inset-0 -z-10 blur-[2px] h-screen w-screen">
-        <div className="flex flex-wrap text-[4px] text-white opacity-40" id="text-bg">
+    return (
+        <div className="max-h-screen overflow-hidden absolute inset-0 -z-10 blur-[2px] h-screen w-screen">
+            <div className="flex flex-wrap text-[4px] text-white opacity-40" id="text-bg">
 
+            </div>
+            <canvas className="fixed inset-0 -z-10 pointer-events-none" ref={canvasRef} />
         </div>
-        <canvas className="fixed inset-0 -z-10 pointer-events-none" ref={canvasRef} />
-    </div>
+    );
 }

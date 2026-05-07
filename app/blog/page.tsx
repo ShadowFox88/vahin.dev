@@ -11,6 +11,6 @@ export const metadata: Metadata = {
     ),
 };
 
-export default function Test() {
+export default function Blog() {
     return <ComingSooner />
 }

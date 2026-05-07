@@ -20,5 +20,5 @@ export default function Section({ index, label, heading, children }: SectionProp
             </h1>
             {children}
         </section>
-    )
+    );
 }

@@ -9,7 +9,7 @@ export default function Links() {
                     key={social.name + "_card"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className=" font-mono border border-amber-600/20 hover:border-amber-500/50 hover:bg-amber-600/5 transition-all duration-200 hover:scale-105 p-2 flex gap-3 items-center group"
+                    className=" font-mono border border-amber-600/20 hover:border-amber-500/50 hover:bg-amber-600/5 transition-all duration-200 hover:scale-105 hover:shadow-[0_0_18px_rgba(245,158,11,0.35),inset_0_0_10px_rgba(245,158,11,0.08)] hover:animate-pulse p-2 flex gap-3 items-center group"
                 >
                     <div className="w-10 h-10 overflow-hidden transition-all duration-200">
                         {social.icon}
@@ -31,5 +31,5 @@ export default function Links() {
                 </a>
             )}
         </div>
-    )
+    );
 }

@@ -2,15 +2,16 @@ import { FRIENDS } from "@/utils/contants";
 
 export default function Friends() {
     return (
-        <div className="pt-2 pb-8 flex gap-3 flex-wrap w-4xl">
+        <div className="pt-2 pb-8 flex gap-3 w-full max-w-4xl">
             {FRIENDS.map((friend) =>
                 <a
                     href={friend.site}
                     key={friend.name + "_card"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="grow font-mono border border-amber-600/20 hover:border-amber-500/50 hover:bg-amber-600/5 transition-all duration-200 hover:scale-105 p-2 flex gap-3 items-center group"
-                >
+                    className="flex-1 min-w-0 font-mono border border-amber-600/20 hover:border-amber-500/50 hover:bg-amber-600/5 hover:shadow-[0_0_18px_rgba(245,158,11,0.35),inset_0_0_10px_rgba(245,158,11,0.08)] hover:animate-pulse transition-all duration-200 hover:scale-105 p-2 flex gap-3 items-center group"
+                >  
+                    {friend.name === "Faaz" ? <span className="hidden hover:visible">Some tooltip text</span>: ""}
                     <div className="flex-none w-10 h-10 overflow-hidden border border-amber-600/20 transition-all duration-200">
                         {friend.image}
                     </div>
@@ -31,5 +32,5 @@ export default function Friends() {
                 </a>
             )}
         </div>
-    )
+    );
 }
