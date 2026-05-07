@@ -3,7 +3,7 @@ import Friends from "../common/Friends";
 import Image from "next/image";
 import Section from "../common/Section";
 
-import avatar from "@/images/avatar.png"
+import avatar from "@/public/images/avatar.png"
 import Links from "../common/Socials";
 
 export default async function HomePage() {

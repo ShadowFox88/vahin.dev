@@ -9,7 +9,7 @@ import { KodeMono } from "@/utils/contants"
 
 export const metadata: Metadata = {
     title: {
-        template: "%s - vahin.dev",
+        template: "%s",
         default: "vahin.dev",
     },
     description:

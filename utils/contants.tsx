@@ -1,15 +1,15 @@
 import Image from 'next/image'
 
-import dep_avatar from "@/images/dep-avatar.jpg"
-import willi_avatar from "@/images/willi-avatar.jpg"
-import ducki_avatar from "@/images/ducki-avatar.jpg"
+import dep_avatar from "@/public/images/dep-avatar.jpg"
+import willi_avatar from "@/public/images/willi-avatar.jpg"
+import ducki_avatar from "@/public/images/ducki-avatar.jpg"
 
-import discord from "@/icons/discord.svg"
-import github from "@/icons/github.svg"
-import gmail from "@/icons/gmail.svg"
-import spotify from "@/icons/spotify.svg"
-import lastfm from "@/icons/lastfm.svg"
-import anilist from "@/icons/anilist.svg"
+import discord from "@/public/icons/discord.svg"
+import github from "@/public/icons/github.svg"
+import gmail from "@/public/icons/gmail.svg"
+import spotify from "@/public/icons/spotify.svg"
+import lastfm from "@/public/icons/lastfm.svg"
+import anilist from "@/public/icons/anilist.svg"
 
 import { Kode_Mono } from "next/font/google"
 

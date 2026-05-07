@@ -7,7 +7,7 @@ import ComingSooner from "@/components/pages/ComingSooner";
 export const metadata: Metadata = {
     title: (templateMetadata.title as AbsoluteTemplateString)!.template!.replace(
         "%s",
-        "test"
+        "blog"
     ),
 };
 
