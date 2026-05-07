@@ -19,7 +19,7 @@ let friends = `
             <a href="https://faaz.dev"><img src="images/ducki-avatar.jpg" alt="Ducki's Site" width="40" height="40" class="friends-icon" /></a>
             <a href="https://itswilli.dev"><img src="images/willi-avatar.jpg" alt="Willi's Site" width="40" height="40" class="friends-icon" /></a>
             <a href="https://deprecating.xyz/"><img src="images/dep-avatar.jpg" alt="Dep's Site" width="40" height="40" class="friends-icon" /></a>
-            <a href="***REMOVED***/"><img src="images/nithilan-avatar.jpg" alt="Nithilan's Site" width="40" height="40" class="friends-icon" /></a>
+            <a href="https://nithilanv.github.io/cv/"><img src="images/nithilan-avatar.jpg" alt="Nithilan's Site" width="40" height="40" class="friends-icon" /></a>
         </div>`
 
 let quick_links = `

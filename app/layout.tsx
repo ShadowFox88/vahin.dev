@@ -2,12 +2,10 @@ import "@/app/globals.css";
 
 import type { Metadata } from "next";
 
-import { Geist_Mono } from "next/font/google";
-import { Geist } from "next/font/google"
-
 import Navbar from "@/components/common/Navbar"
 import Footer from "@/components/common/Footer"
 import Background from "@/components/common/Background";
+import { KodeMono } from "@/utils/contants"
 
 export const metadata: Metadata = {
     title: {
@@ -18,17 +16,6 @@ export const metadata: Metadata = {
         "My personal site.",
 };
 
-const GeistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-
-const GeistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export default function Layout({
     children,
 }: Readonly<{
@@ -37,12 +24,14 @@ export default function Layout({
     return (
         <html>
             <body>
-                <Background />
-                <div className={`flex flex-col min-h-screen px-6 antialiased max-w-3xl relative mx-auto ${GeistMono.className}`}>
+                <div className={`relative flex flex-col min-h-screen mx-auto h-screen w-screen overflow-hidden antialiased ${KodeMono.className}`}>
+                    <Background />
                     <Navbar />
-                    <main className="py-5 font-mono">{children}</main>
-                    <p className="grow"></p>
-                    <Footer />
+                    <div className="relative flex flex-col overflow-y-auto h-full overflow-x-hidden px-4 sm:px-8">
+                        <main className="py-5 font-mono mx-auto max-w-4xl w-4xl">{children}</main>
+                        <p className="grow"></p>
+                        <Footer />
+                    </div>
                 </div>
             </body>
         </html>

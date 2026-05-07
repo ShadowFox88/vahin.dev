@@ -1,4 +1,4 @@
-import HomePage from "@/components/home/HomePage";
+import HomePage from "@/components/pages/HomePage";
 
 import { metadata as templateMetadata } from "./layout";
 
