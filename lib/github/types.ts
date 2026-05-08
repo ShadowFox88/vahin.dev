@@ -54,6 +54,7 @@ export type Commit = {
     author: CommitUser;
     committer: CommitUser;
     message: string;
+    verification: CommitVerification;
 }
 
 export type LargeCommit = {
