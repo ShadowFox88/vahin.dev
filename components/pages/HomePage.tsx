@@ -2,6 +2,8 @@ import LoremIpsum from "../common/LoremIpsum";
 import Friends from "../common/Friends";
 import Image from "next/image";
 import Section from "../common/Section";
+import Projects from "../common/Projects";
+import Commits from "../common/Commits"
 
 import avatar from "@/public/images/avatar.png"
 import Links from "../common/Socials";
@@ -37,8 +39,16 @@ export default async function HomePage() {
                 <Friends />
             </Section>
 
-            <Section index="04" label="lorem ipsum" heading="stuff">
-                <LoremIpsum paragraphs={20} />
+            <Section index="04" label="projects" heading="pinned repositories">
+                <Projects username="shadowfox88"/>
+            </Section>
+
+            <Section index="05" label="lorem ipsum" heading="stuff">
+                <LoremIpsum paragraphs={1} />
+            </Section>
+
+            <Section index="06" label="commits" heading="commit log · recent">
+                <Commits username="shadowfox88" repo="vahin.dev"/>
             </Section>
         </div>
     );

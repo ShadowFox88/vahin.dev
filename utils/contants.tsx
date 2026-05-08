@@ -3,6 +3,7 @@ import Image from 'next/image'
 import dep_avatar from "@/public/images/dep-avatar.jpg"
 import willi_avatar from "@/public/images/willi-avatar.jpg"
 import ducki_avatar from "@/public/images/ducki-avatar.jpg"
+import viswa_avatar from "@/public/images/viswa-avatar.jpg"
 
 import discord from "@/public/icons/discord.svg"
 import github from "@/public/icons/github.svg"
@@ -17,6 +18,10 @@ export const KodeMono = Kode_Mono({
     variable: "--font-kode-mono",
     subsets: ["latin"],
 });
+
+export const GITHUB_API_VERSION = "2026-03-10"
+export const USER_AGENT = "vahin.dev (github.com/shadowfox88/vahin.dev)"
+export const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 export const SOCIALS: { name: string; href: string; icon: React.ReactNode, username: string }[] = [
     {
@@ -79,4 +84,11 @@ export const FRIENDS = [
         site: "https://faaz.dev",
         image: <Image src={ducki_avatar.src} width="60" height="60" alt="profile_pic" className="mr-2" />,
     },
+    {
+        name: "Viswa",
+        githubUsername: "justanotherbyte",
+        githubId: 6226748,
+        site: "https://viswa.space",
+        image: <Image src={viswa_avatar.src} width="60" height="60" alt="profile_pic" className="mr-2" />,
+    }
 ];
