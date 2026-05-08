@@ -23,44 +23,59 @@ export const GITHUB_API_VERSION = "2026-03-10"
 export const USER_AGENT = "vahin.dev (github.com/shadowfox88/vahin.dev)"
 export const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
+export const PGP_FINGERPRINT = "DCDE 8B23 B991 92C4 13BB 82AB 2618 AE42 B493 A43B"
+
 export const SOCIALS: { name: string; href: string; icon: React.ReactNode, username: string }[] = [
     {
         name: "Discord",
         href: "https://discord.com/users/606648465065246750",
-        icon: <Image src={discord.src} width="60" height="60" alt="discord logo" className="mr-2 mt-1"/>,
+        icon: <Image src={discord.src} width="60" height="60" alt="discord logo" className="mr-2 mt-1" />,
         username: "flyingdog."
     },
     {
         name: "GitHub",
         href: "https://github.com/ShadowFox88",
-        icon: <Image src={github.src} width="60" height="60" alt="github logo" className="mr-2"/>,
+        icon: <Image src={github.src} width="60" height="60" alt="github logo" className="mr-2" />,
         username: "ShadowFox88"
     },
     {
         name: "Email",
         href: "mailto:vahin@vahin.dev",
-        icon: <Image src={gmail.src} width="60" height="60" alt="gmail logo" className="mr-2"/>,
+        icon: <Image src={gmail.src} width="60" height="60" alt="gmail logo" className="mr-2" />,
         username: "vahin@vahin.dev",
     },
     {
         name: "Spotify",
         href: "https://open.spotify.com/user/me9tp8y86bqius449ol8pff0n",
-        icon: <Image src={spotify.src} width="60" height="60" alt="spotify logo" className="mr-2"/>,
+        icon: <Image src={spotify.src} width="60" height="60" alt="spotify logo" className="mr-2" />,
         username: "Vahin",
     },
     {
         name: "Last.fm",
         href: "https://www.last.fm/user/ShadowFox88",
-        icon: <Image src={lastfm.src} width="60" height="60" alt="last.fm logo" className="mr-2"/>,
+        icon: <Image src={lastfm.src} width="60" height="60" alt="last.fm logo" className="mr-2" />,
         username: "ShadowFox88",
     },
     {
         name: "Anilist",
         href: "https://anilist.co/user/flyingdog/",
-        icon: <Image src={anilist.src} width="60" height="60" alt="last.fm logo" className="mr-2 rounded-md"/>,
+        icon: <Image src={anilist.src} width="60" height="60" alt="last.fm logo" className="mr-2 rounded-md" />,
         username: "flyingdog"
-    }
+    },
+    {
+        name: "PGP",
+        href: "/pgp",
+        icon: <svg width="42px" height="42px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M12 19H5C3.89543 19 3 18.1046 3 17V7C3 5.89543 3.89543 5 5 5H19C20.1046 5 21 5.89543 21 7V12" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            <path d="M15 17.4286C15 16.9552 15.3838 16.5714 15.8571 16.5714H20.1429C20.6162 16.5714 21 16.9552 21 17.4286V19.1429C21 19.6162 20.6162 20 20.1429 20H15.8571C15.3838 20 15 19.6162 15 19.1429V17.4286Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M16.7143 15.2857C16.7143 14.5756 17.2899 14 18 14C18.7101 14 19.2857 14.5756 19.2857 15.2857V16.5714H16.7143V15.2857Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>,
+        username: PGP_FINGERPRINT,
+    },
 ];
+
+
 
 export const FRIENDS = [
     {

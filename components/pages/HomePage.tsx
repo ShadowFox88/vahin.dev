@@ -40,15 +40,16 @@ export default async function HomePage() {
             </Section>
 
             <Section index="04" label="projects" heading="pinned repositories">
-                <Projects username="shadowfox88"/>
+                <Projects username="shadowfox88" />
             </Section>
 
             <Section index="05" label="lorem ipsum" heading="stuff">
                 <LoremIpsum paragraphs={1} />
+                
             </Section>
 
-            <Section index="06" label="commits" heading="commit log · recent">
-                <Commits username="shadowfox88" repo="vahin.dev"/>
+            <Section index="06" label="log" heading="commit log · recent">
+                <Commits username="shadowfox88" repo="vahin.dev" />
             </Section>
         </div>
     );

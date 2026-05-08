@@ -1,0 +1,28 @@
+"use client";
+import { useState } from "react";
+
+export default function CopyButton({ text }: { text: string }) {
+    const [copied, setCopied] = useState(false);
+
+    const copy = () => {
+        navigator.clipboard.writeText(text);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    return (
+        <button onClick={copy} className="absolute top-2 right-2 border border-amber-600/40 bg-black text-amber-600/60 hover:text-amber-600 hover:border-amber-600 transition-colors p-1.5 group"
+            title="Copy key">
+            {copied ? (
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 6 L5 9 L10 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            ) : (
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <rect x="1" y="3" width="7" height="8" rx="0" stroke="currentColor" strokeWidth="1.2"/>
+                    <path d="M3 3 L3 2 L10 2 L10 9 L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+                </svg>
+            )}
+        </button>
+    );
+}
