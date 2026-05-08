@@ -18,7 +18,7 @@ export default function PGP() {
                     <p className="text-amber-600/40 text-xs uppercase tracking-widest">// usage</p>
                     <p className="text-amber-600/60 text-xs font-mono">gpg --import pgp.asc</p>
                 </div>
-                <a href="/pgp.asc" download className="ml-auto border border-amber-600/40 text-amber-600/80 text-xs uppercase tracking-widest px-4 py-2 hover:border-amber-600 transition-colors self-start">
+                <a href="/pgp.asc" download className="ml-auto border border-amber-600/40 text-amber-600/80 text-xs uppercase tracking-widest px-4 py-2 hover:shadow-[0_0_18px_rgba(245,158,11,0.35),inset_0_0_10px_rgba(245,158,11,0.08)] hover:animate-pulse hover:border-amber-600 hover:scale-105 transition-all duration-200 self-start">
                     download key
                 </a>
             </div>

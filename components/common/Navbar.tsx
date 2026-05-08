@@ -27,7 +27,7 @@ export default function Navbar() {
                     {numbers.map((index: number) => (
                         <li key={pages[index]}>
                             <Link
-                                className={`whitespace-nowrap hover:text-lime-400/75 hover:scale-105 transition-all duration-200 inline-block text-xs ${blueIndex == index ? "text-cyan-500" : ""}`}
+                                className={`whitespace-nowrap hover:text-lime-400/75 hover:scale-115 transition-all duration-200 inline-block text-xs ${blueIndex == index ? "text-cyan-500" : ""}`}
                                 href={paths[index]}
                                 onClick={() => setOpen(false)}
                             >{pages[index]}</Link>
