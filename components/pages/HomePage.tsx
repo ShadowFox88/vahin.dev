@@ -2,7 +2,7 @@ import LoremIpsum from "../common/LoremIpsum";
 import Friends from "../common/Friends";
 import Image from "next/image";
 import Section from "../common/Section";
-import Projects from "../common/Projects";
+import Projects from "../common/PinnedRepositories";
 import Commits from "../common/Commits"
 
 import avatar from "@/public/images/avatar.png"

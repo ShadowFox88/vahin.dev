@@ -51,14 +51,16 @@ export type CommitVerification = {
 }
 
 export type Commit = {
+    sha: string;
     author: CommitUser;
     committer: CommitUser;
     message: string;
     verification: CommitVerification;
+    html_url: string;
 }
 
-export type LargeCommit = {
+export type ReturnedCommit = {
     sha: string;
-    commit: Commit;
+    commit: Omit<Commit, "sha" | "html_url">;
     html_url: string;
 }
