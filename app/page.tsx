@@ -1,4 +1,4 @@
-import HomePage from "@/components/pages/HomePage";
+import { Home } from "@/components/pages/Home";
 
 import { metadata as templateMetadata } from "./layout";
 
@@ -12,6 +12,6 @@ export const metadata: Metadata = {
   ),
 };
 
-export default function Home() {
-  return <HomePage />;
+export default function Page() {
+  return <Home />;
 }

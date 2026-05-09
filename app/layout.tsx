@@ -2,9 +2,8 @@ import "@/app/globals.css";
 
 import type { Metadata } from "next";
 
-import Navbar from "@/components/common/Navbar"
-import Footer from "@/components/common/Footer"
-import Background from "@/components/common/Background";
+import { Background, Navbar, Footer } from "@/components/common/Navigation"
+
 import { KodeMono } from "@/utils/contants"
 
 export const metadata: Metadata = {

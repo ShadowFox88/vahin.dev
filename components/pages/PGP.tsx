@@ -4,7 +4,7 @@ import path from 'path';
 import CopyButton from '../common/CopyButton';
 import { PGP_FINGERPRINT } from "@/utils/contants"
 
-export default function PGP() {
+export function PGP() {
     const key = fs.readFileSync(path.join(process.cwd(), 'public', 'pgp.asc'), 'utf-8');
 
     return (
@@ -25,7 +25,7 @@ export default function PGP() {
             <div>
                 <p className="text-amber-600/40 text-xs uppercase tracking-widest mb-2">// pgp key</p>
                 <div className="relative">
-                    <pre className="text-amber-600/80 text-xs font-mono whitespace-pre overflow-x-auto border border-amber-600/20 p-4">
+                    <pre className="text-amber-600/80 text-xs font-mono whitespace-pre overflow-x-auto border border-amber-600/20 p-4 rounded-sm">
                         {key}
                     </pre>
                     <CopyButton text={key}/>

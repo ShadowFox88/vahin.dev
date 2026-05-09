@@ -1,7 +1,8 @@
-import Section from "../common/Section";
-import Repositories from "../common/Repositories";
+import { Repositories } from "../common/Github";
 
-export default async function Projects() {
+import Section from "../common/Section";
+
+export async function Projects() {
     return (
         <div>
             <Section index="01" label="repos" heading="all my projects">

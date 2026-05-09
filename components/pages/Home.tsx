@@ -1,19 +1,20 @@
 import Image from "next/image";
 
 import Section from "../common/Section";
-import Projects from "../common/PinnedRepositories";
-import Commits from "../common/Commits"
+import BlogPosts from "../common/BlogPosts";
+
+import { PinnedRepositories, Commits } from "../common/Github";
+
 import Friends from "../common/Friends";
 import Socials from "../common/Socials";
-import BlogPosts from "../common/BlogPosts";
 
 import avatar from "@/public/images/avatar.png"
 
-export default async function HomePage() {
+export async function Home() {
     return (
         <div>
             <Section index="01" label="about me" heading="origin">
-                <div className="border-amber-600/20 border-2 p-5 mb-5 flex">
+                <div className="border-amber-600/20 border-2 p-5 mb-5 flex rounded-sm">
                     <Image
                         width={94}
                         height={94}
@@ -41,7 +42,7 @@ export default async function HomePage() {
             </Section>
 
             <Section index="04" label="projects" heading="pinned repositories">
-                <Projects username="shadowfox88" />
+                <PinnedRepositories username="shadowfox88" />
             </Section>
 
             <Section index="05" label="blog posts" heading="my thoughts">

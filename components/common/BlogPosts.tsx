@@ -1,18 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-export const CALENDAR_SVG = (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="stroke-amber-500">
-        <path d="M3 9H21M17 13.0014L7 13M10.3333 17.0005L7 17M7 3V5M17 3V5M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-)
-export const PAGE_SVG = (
-    <svg width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" className="stroke-amber-500">
-        <path strokeLinejoin="round" strokeWidth="2" d="M6 5a2 2 0 012-2h16a2 2 0 012 2v22a2 2 0 01-2 2H8a2 2 0 01-2-2V5z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 9h4M10 16h12M10 20h12M10 24h4" />
-        <circle cx="22" cy="9" r="1" className="fill-amber-500" />
-    </svg>
-)
+import { CALENDAR_SVG, PAGE_SVG } from '@/utils/elements';
 
 interface BlogPostsProps {
     number?: number;
@@ -54,7 +43,7 @@ export default function BlogPosts({ number }: BlogPostsProps) {
                 <a
                     key={`${[post.filename]}_blog_entry`}
                     href={`/blog/${post.filename}`}
-                    className="relative group flex-1 font-mono border border-amber-600/20 hover:border-amber-500/50 hover:bg-amber-600/5 hover:shadow-[0_0_18px_rgba(245,158,11,0.35),inset_0_0_10px_rgba(245,158,11,0.08)] hover:animate-pulse transition-all duration-200 hover:scale-105 p-2 flex gap-3 items-center group"
+                    className="rounded-sm relative group flex-1 font-mono border border-amber-600/20 hover:border-amber-500/50 hover:bg-amber-600/5 hover:shadow-[0_0_18px_rgba(245,158,11,0.35),inset_0_0_10px_rgba(245,158,11,0.08)] hover:animate-pulse transition-all duration-200 hover:scale-105 p-2 flex gap-3 items-center group"
                 >
                     <div className="w-full">
                         <div className="flex items-center justify-between mt-auto">

@@ -1,4 +1,4 @@
-import PGP from "@/components/pages/PGP";
+import { PGP } from "@/components/pages/PGP";
 
 import { metadata as templateMetadata } from "../layout";
 
@@ -12,6 +12,6 @@ export const metadata: Metadata = {
   ),
 };
 
-export default function PGP_Page() {
+export default function Page() {
   return <PGP />;
 }

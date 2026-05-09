@@ -9,11 +9,11 @@ export default function Friends() {
                     key={friend.name + "_card"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative group flex-1 min-w-0 font-mono border border-amber-600/20 hover:border-amber-500/50 hover:bg-amber-600/5 hover:shadow-[0_0_18px_rgba(245,158,11,0.35),inset_0_0_10px_rgba(245,158,11,0.08)] hover:animate-pulse transition-all duration-200 hover:scale-105 p-2 flex gap-3 items-center group"
+                    className="relative rounded-sm group flex-1 min-w-0 font-mono border border-amber-600/20 hover:border-amber-500/50 hover:bg-amber-600/5 hover:shadow-[0_0_18px_rgba(245,158,11,0.35),inset_0_0_10px_rgba(245,158,11,0.08)] hover:animate-pulse transition-all duration-200 hover:scale-105 p-2 flex gap-3 items-center group"
                 >
 
                     {friend.name === "Faaz" ? (
-                        <div className="absolute -top-2 -right-2 bg-black border border-amber-600/60 text-amber-600/80 text-[8px] uppercase tracking-widest px-1.5 py-0.5">
+                        <div className="absolute rounded-sm -top-2 -right-2 bg-black border border-amber-600/60 text-amber-600/80 text-[8px] uppercase tracking-widest px-1.5 py-0.5">
                             contributor
                         </div>
                     ) : ""}

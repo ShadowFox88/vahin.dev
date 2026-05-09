@@ -1,7 +1,6 @@
 "use client"
 
 import Link from 'next/link'
-import Command from '@/components/common/Command'
 import { usePathname } from 'next/navigation'
 
 export default function NotFound() {
@@ -32,11 +31,11 @@ export default function NotFound() {
                 </Link>
             </div>
             <div className="max-w-3xl w-180 p-5 pr-50 pt-0 bg-zinc-950 rounded-b-xl">
-                <Command command="cat content.html" className="ml-0" />
+                <span className="text-purple-500 ml-0">$</span> cat content.html
                 <div className="mt-5 text-sm text-red-500">Error: "{usePathname()}" cannot be located. No such file or directory.</div>
                 <div className="mt-5 mb-10 text-xs text-gray-500">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</div>
 
-                <Command command="exit" className="ml-0" />
+                <span className="text-purple-500 ml-0">$</span> exit
                 <div className="text-orange-500 mb-5 text-sm">Process finished with exit code 404</div>
                 <Link className="hover:text-lime-400/75 transition-all duration-200 hover:scale-105 inline-block" href="/">[ home ]</Link>
             </div>

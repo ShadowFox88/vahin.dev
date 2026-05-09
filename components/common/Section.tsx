@@ -7,7 +7,7 @@ interface SectionProps {
     children?: React.ReactNode
 }
 
-export default function Section({ index, label, heading, children }: SectionProps) {
+export default function section({ index, label, heading, children }: SectionProps) {
     const renderedLabel = `${index}  •  ${label}`
 
     return (

@@ -11,12 +11,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 
 ## 2. Headings
 
-# The Quick Brown Fox
-## Jumps Over
-### The Lazy Dog
-#### Somewhere In
-##### A Field
-###### Far Away
+# H1 - The Quick Brown Fox
+## H2 - Jumps Over
+### H3 - The Lazy Dog
+#### H4 - Somewhere In
+##### H5 - A Field
+###### H6 - Far Away
 
 ---
 
