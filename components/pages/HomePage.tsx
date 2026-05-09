@@ -1,12 +1,13 @@
-import LoremIpsum from "../common/LoremIpsum";
-import Friends from "../common/Friends";
 import Image from "next/image";
+
 import Section from "../common/Section";
 import Projects from "../common/PinnedRepositories";
 import Commits from "../common/Commits"
+import Friends from "../common/Friends";
+import Socials from "../common/Socials";
+import BlogPosts from "../common/BlogPosts";
 
 import avatar from "@/public/images/avatar.png"
-import Links from "../common/Socials";
 
 export default async function HomePage() {
     return (
@@ -32,7 +33,7 @@ export default async function HomePage() {
             </Section>
 
             <Section index="02" label="socials" heading="where to find me">
-                <Links />
+                <Socials />
             </Section>
 
             <Section index="03" label="great people" heading="friends">
@@ -43,9 +44,8 @@ export default async function HomePage() {
                 <Projects username="shadowfox88" />
             </Section>
 
-            <Section index="05" label="lorem ipsum" heading="stuff">
-                <LoremIpsum paragraphs={1} />
-                
+            <Section index="05" label="blog posts" heading="my thoughts">
+                <BlogPosts number={3} />
             </Section>
 
             <Section index="06" label="log" heading="commit log · recent">

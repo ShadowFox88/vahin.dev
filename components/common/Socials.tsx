@@ -1,7 +1,7 @@
 import { SOCIALS } from "@/utils/contants"
 import Link from "next/link";
 
-export default function Links() {
+export default function Socials() {
     return (
         <div className="pt-2 pb-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 w-4xl">
             {SOCIALS.map((social) =>

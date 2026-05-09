@@ -1,4 +1,3 @@
-import LoremIpsum from "../common/LoremIpsum";
 import Section from "../common/Section";
 
 export default async function ComingSooner() {
