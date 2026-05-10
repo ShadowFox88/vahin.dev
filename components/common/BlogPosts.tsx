@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import matter from 'gray-matter';
 
 import { CALENDAR_SVG, PAGE_SVG } from '@/utils/elements';
 
@@ -10,26 +11,23 @@ interface BlogPostsProps {
 export default function BlogPosts({ number }: BlogPostsProps) {
     const blogDir = path.join(process.cwd(), 'public', 'blog_posts');
     const files = fs.readdirSync(blogDir).filter(f => f.endsWith('.md'));
+    
     let posts = files.map(file => {
-        const content = fs.readFileSync(path.join(blogDir, file), 'utf-8');
-        const [title, description] = content.split('\n');
-        const stats = fs.statSync(path.join(blogDir, file));
+        const raw = fs.readFileSync(path.join(blogDir, file), 'utf-8');
+        const { data, content } = matter(raw);
+        const [titleLine, description] = content.split('\n');
         const readTime = Math.ceil(content.split(/\s+/).length / 200); // assume the average person reads 200wpm
         // according to wikipedia - 08/05/26: https://en.wikipedia.org/wiki/Words_per_minute#Reading_and_comprehension (it says average wpm is 184±29 wpm)
         return {
-            filename: file.replace(".md", ""),
-            title: title.replace(/^#+ /, ''),
-            description: description.trim(),
-            created: stats.birthtime,
-            updated: stats.mtime,
+            filename: file.replace('.md', ''),
+            title: data.title ?? titleLine.replace(/^#+ /, ''),
+            description: data.description ?? description?.trim(),
+            created: data.created ? new Date(data.created) : new Date(0),
+            updated: data.updated ? new Date(data.updated) : new Date(0),
             readTime
         };
     });
-    const dateOptions: Intl.DateTimeFormatOptions = {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-    };
+    const fmt = (d: Date) => new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(d);
 
     posts.sort((a, b) => b.created.getTime() - a.created.getTime()) // sorts posts in desc order
 
@@ -53,7 +51,7 @@ export default function BlogPosts({ number }: BlogPostsProps) {
                             </svg>
                         </div>
                         <p className="text-amber-400/80 text-sm tracking-wider uppercase truncate">{post.title}</p>
-                        <p className="text-xs flex items-center gap-3">{CALENDAR_SVG} {`${new Intl.DateTimeFormat("en-US", dateOptions).format(post.created)}`} {PAGE_SVG} {post.readTime} min read</p>
+                        <p className="text-xs flex items-center gap-3">{CALENDAR_SVG} {`${fmt(post.created)}`} {PAGE_SVG} {post.readTime} min read</p>
                         <p className="text-xs min-h-[2lh] text-amber-600/40 line-clamp-2">{post.description}</p>
                     </div>
                 </a>

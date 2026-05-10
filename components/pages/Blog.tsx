@@ -15,6 +15,7 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeStringify from 'rehype-stringify';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
+import matter from 'gray-matter';
 import 'katex/dist/katex.min.css';
 
 import Section from "../common/Section";
@@ -72,12 +73,16 @@ export async function BlogSlug({ blog }: BlogSlugProps) {
 
     if (!fs.existsSync(filePath)) notFound();
 
-    const content = fs.readFileSync(filePath, 'utf-8');
-    const [titleLine, description] = content.split('\n');
-    const title = titleLine.replace(/^#+ /, '');
-    const stats = fs.statSync(filePath);
+    const raw = fs.readFileSync(filePath, 'utf-8');
+    const { data, content } = matter(raw);
+    const title = data.title ?? content.split('\n')[0].replace(/^#+ /, '');
+    const description = data.description ?? content.split('\n')[1]?.trim();
+    const created = data.created ? new Date(data.created) : new Date(0);
+    const updated = data.updated ? new Date(data.updated) : new Date(0);
     const readTime = Math.ceil(content.split(/\s+/).length / 200);
     const fmt = (d: Date) => new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(d);
+
+    // this doesn't work on vercel
 
     const html = await unified()
         .use(remarkParse)
@@ -100,8 +105,8 @@ export async function BlogSlug({ blog }: BlogSlugProps) {
                 <h1 className="text-amber-400 uppercase tracking-widest text-lg">{title}</h1>
                 <p className="text-amber-600/50 text-xs">{description}</p>
                 <div className="flex gap-6 mt-2 text-[10px] uppercase tracking-widest text-amber-600/40">
-                    <span className="flex items-center gap-1">{CALENDAR_SVG} created {fmt(stats.birthtime)}</span>
-                    <span className="flex items-center gap-1">{CALENDAR_SVG} updated {fmt(stats.mtime)}</span>
+                    <span className="flex items-center gap-1">{CALENDAR_SVG} created {fmt(created)}</span>
+                    <span className="flex items-center gap-1">{CALENDAR_SVG} updated {fmt(updated)}</span>
                     <span className="flex items-center gap-1">{PAGE_SVG} {readTime} min read</span>
                 </div>
             </div>

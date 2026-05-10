@@ -12,6 +12,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "axios": "^1.16.0",
     "clsx": "^2.1.1",
+    "gray-matter": "^4.0.3",
     "katex": "^0.16.45",
     "next": "16.2.3",
     "react": "19.2.3",

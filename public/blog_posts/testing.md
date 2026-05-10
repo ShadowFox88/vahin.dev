@@ -1,3 +1,11 @@
+---
+title: Rendering Test
+description: A rendering test to ensure LaTeX and Markdown render properly.
+slug: testing
+
+created: 2026-05-08
+updated: 2026-05-10
+---
 # Rendering Test
 A rendering test to ensure LaTeX and Markdown render properly.
 
