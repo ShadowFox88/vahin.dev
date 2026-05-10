@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 
 export function Navbar() {
-    const pages = ["[ home ]", "[ blog ]", "[ projects ]"];
+    const pages = ["home", "blog", "projects"];
     const paths = ["/", "/blog", "/projects"];
     const numbers = Object.keys(pages).map((index: string) => Number(index))
     const blueIndex = paths.indexOf(usePathname())
@@ -31,7 +31,7 @@ export function Navbar() {
                                 className={`whitespace-nowrap hover:text-lime-400/75 hover:scale-115 transition-all duration-200 inline-block text-xs ${blueIndex == index ? "text-cyan-500" : ""}`}
                                 href={paths[index]}
                                 onClick={() => setOpen(false)}
-                            >{pages[index]}</Link>
+                            >[ {pages[index]} ]</Link>
                         </li>
                     ))}
                 </ul>
@@ -143,11 +143,6 @@ export function Background() {
     }, []);
 
     return (
-        <div className="max-h-screen overflow-hidden absolute inset-0 -z-10 blur-[2px] h-screen w-screen">
-            <div className="flex flex-wrap text-[4px] text-white opacity-40" id="text-bg">
-
-            </div>
-            <canvas className="fixed inset-0 -z-10 pointer-events-none" ref={canvasRef} />
-        </div>
+        <canvas className="fixed inset-0 -z-10 pointer-events-none max-h-screen overflow-hidden blur-[2px] h-screen w-screen" ref={canvasRef} />
     );
 }
