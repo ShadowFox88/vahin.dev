@@ -113,6 +113,7 @@ export async function BlogSlug({ blog }: BlogSlugProps) {
             <div className="prose prose-invert prose-amber max-w-none font-mono transition-all duration-200
                 prose-headings:text-amber-400 prose-headings:uppercase prose-headings:tracking-widest
                 prose-p:text-amber-600/70
+                prose-td:text-amber-600/70
                 prose-a:text-amber-500 prose-a:hover:scale-110 prose-a:inline-block prose-a:underline prose-a:underline-offset-4
                 prose-strong:text-amber-400
                 prose-pre:bg-black prose-pre:border prose-pre:border-amber-600/20 prose-pre:rounded-sm
