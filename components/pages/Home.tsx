@@ -7,6 +7,7 @@ import { PinnedRepositories, Commits } from "../common/Github";
 
 import Friends from "../common/Friends";
 import Socials from "../common/Socials";
+import Services from "../common/Services"
 
 import avatar from "@/public/images/avatar.png"
 
@@ -49,7 +50,11 @@ export async function Home() {
                 <BlogPosts number={3} />
             </Section>
 
-            <Section index="06" label="log" heading="commit log · recent">
+            <Section index="06" label="Links" heading="services i host">
+                <Services />
+            </Section>
+
+            <Section index="07" label="log" heading="commit log · recent">
                 <Commits username="shadowfox88" repo="vahin.dev" />
             </Section>
         </div>

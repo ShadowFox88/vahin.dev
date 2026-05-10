@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-import { CALENDAR_SVG, PAGE_SVG } from '@/utils/elements';
+import { CALENDAR_SVG, PAGE_SVG, POP_OUT_SVG } from '@/utils/elements';
 
 interface BlogPostsProps {
     number?: number;
@@ -45,10 +45,8 @@ export default function BlogPosts({ number }: BlogPostsProps) {
                 >
                     <div className="w-full">
                         <div className="flex items-center justify-between mt-auto">
-                            <p className="text-amber-600/40 text-[10px] uppercase tracking-widest">//blog post</p>
-                            <svg width="14" height="14" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                                <path fill="#c47a00" fillRule="evenodd" d="M5,2 C5.55228,2 6,2.44772 6,3 C6,3.55228 5.55228,4 5,4 L4,4 L4,12 L12,12 L12,11 C12,10.4477 12.4477,10 13,10 C13.5523,10 14,10.4477 14,11 L14,12 C14,13.1046 13.1046,14 12,14 L4,14 C2.89543,14 2,13.1046 2,12 L2,4 C2,2.89543 2.89543,2 4,2 L5,2 Z M15,1 L15,5.99814453 C15,6.55043453 14.5523,6.99814453 14,6.99814453 C13.4477,6.99814453 13,6.55043453 13,5.99814453 L13,4.41419 L8.71571,8.69846 C8.32519,9.08899 7.69202,9.08899 7.3015,8.69846 C6.91097,8.30794 6.91097,7.67477 7.3015,7.28425 L11.5858,3 L9.99619141,3 C9.44391141,3 8.99619141,2.55228 8.99619141,2 C8.99619141,1.44772 9.44391141,1 9.99619141,1 L15,1 Z" />
-                            </svg>
+                            <p className="text-amber-600/40 text-[10px] uppercase tracking-widest">// blog post</p>
+                            {POP_OUT_SVG}
                         </div>
                         <p className="text-amber-400/80 text-sm tracking-wider uppercase truncate">{post.title}</p>
                         <p className="text-xs flex items-center gap-3">{CALENDAR_SVG} {`${fmt(post.created)}`} {PAGE_SVG} {post.readTime} min read</p>
