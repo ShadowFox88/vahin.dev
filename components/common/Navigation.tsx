@@ -13,7 +13,7 @@ export function Navbar() {
     const [open, setOpen] = useState(false)
 
     return (
-        <div className="relative px-6 z-10 border-b border-neutral-700/50">
+        <div className="relative px-6 z-10 border-b border-neutral-700/50 bg-background">
             <div className="pt-6 pb-5 flex flex-row justify-between items-center">
                 <p className="text-cyan-700 font-bold">[ Vahin ]</p>
 
@@ -82,7 +82,7 @@ export function Background() {
     useEffect(() => {
         const canvas = canvasRef.current;
         if (canvas == null) return;
-        const ctx = canvas.getContext("2d");
+        const ctx = canvas.getContext("2d", { alpha: true });
         if (ctx == null) return;
 
         ctx.imageSmoothingEnabled = false
@@ -91,7 +91,7 @@ export function Background() {
             ctx.clearRect(0, 0, w, h);
 
             const size = window.innerWidth / 10;
-            ctx.globalAlpha = 0.2;
+            ctx.globalAlpha = 0.06;
             ctx.strokeStyle = "oklch(76.9% 0.188 70.08)";
 
             for (let x = 0; x < w; x += size) {
@@ -100,7 +100,7 @@ export function Background() {
                 }
             }
 
-            ctx.globalAlpha = 0.05;
+            ctx.globalAlpha = 0.03;
             ctx.fillStyle = "oklch(76.9% 0.188 70.08)";
 
             // background letters
@@ -126,11 +126,9 @@ export function Background() {
             canvas.width = width * dpr;
             canvas.height = height * dpr;
 
-            // set display size (CSS size)
             canvas.style.width = `${width}px`;
             canvas.style.height = `${height}px`;
 
-            // reset transform so drawing doesn't drift
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
             draw(width, height);
