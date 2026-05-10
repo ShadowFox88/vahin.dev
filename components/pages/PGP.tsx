@@ -8,7 +8,7 @@ export function PGP() {
     const key = fs.readFileSync(path.join(process.cwd(), 'public', 'pgp.asc'), 'utf-8');
 
     return (
-        <main className="min-h-screen bg-black p-8 max-w-3xl mx-auto flex flex-col gap-8">
+        <main className="bg-black p-8 max-w-3xl mx-auto flex flex-col gap-8">
             <div className="flex gap-8">
                 <div className="flex flex-col gap-2">
                     <p className="text-amber-600/40 text-xs uppercase tracking-widest">// fingerprint</p>
