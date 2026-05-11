@@ -19,3 +19,26 @@ body {
   color: var(--foreground);
   font-family: "Pixelify Sans", sans-serif;
 }
+
+/* this has been stolen from CopyButton.tsx's classes */
+.rehype-pretty-copy {
+    @apply absolute top-2 right-2 border rounded-sm border-amber-600/40 hover:shadow-[0_0_18px_rgba(245,158,11,0.35),inset_0_0_10px_rgba(245,158,11,0.08)] hover:animate-pulse hover:scale-115 hover:text-amber-600 hover:border-amber-600 transition-all duration-200 bg-black text-amber-600/60 p-1.5
+}
+
+
+/* rehype-pretty-copy uses bg image to set the dumb looking clipboard and this is the CopyButton svg encoded. */
+pre button.rehype-pretty-copy .ready {
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='1' y='3' width='7' height='8' rx='0' stroke='%23b45309' stroke-opacity='0.6' stroke-width='1.2'/%3E%3Cpath d='M3 3 L3 2 L10 2 L10 9 L8 9' stroke='%23b45309' stroke-opacity='0.6' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+}
+
+pre button.rehype-pretty-copy .success {
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 6 L5 9 L10 3' stroke='%23b45309' stroke-opacity='0.6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+}
