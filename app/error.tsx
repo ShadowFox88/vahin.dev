@@ -1,8 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react"
 
 const CHAR_DURATION = 30
 const LINE_DURATION = 300
@@ -14,44 +13,37 @@ type LINE = {
     extra?: string,
 }
 
-const getLines = (pathname: string) => [
+const LINES: LINE[] = [
     {
-        text: "cat content.html",
+        text: "run app.exe",
         color: "text-foreground",
         command: true,
         extra: "p-2"
     },
     {
-        text: `Error: ${pathname} cannot be located. No such file or directory exists.`,
+        text: "FATAL: unhandled exception — process terminated",
         color: "text-red-500",
         command: false,
         extra: "text-sm pl-2"
     },
     {
-        text: "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+        text: "SIGABRT: core dumped",
+        color: "text-red-500/60",
+        command: false,
+        extra: "text-xs pl-2"
+    },
+    {
+        text: "Something went wrong on our end. Please try again.",
         color: "text-gray-400",
         command: false,
         extra: "text-xs pl-2 pt-5"
     },
-    {
-        text: "exit",
-        color: "text-foreground",
-        command: true,
-        extra: "pt-10 pl-2"
-    },
-    {
-        text: "Process finished with exit code 404",
-        color: "text-orange-500",
-        command: false,
-        extra: "pl-2 text-sm"
-    },
 ]
 
-export default function NotFound() {
-    const LINES = getLines(usePathname())
+export default function Error({ reset }: { reset: () => void }) {
     const [content, setContent] = useState<Array<LINE>>([])
     const [index, setIndex] = useState(0)
-    
+
     useEffect(() => {
         if (index == LINES.length) return
 
@@ -96,7 +88,10 @@ export default function NotFound() {
                     </p>
                 )}
                 {index == LINES.length && (
-                    <Link className="hover:text-lime-400/75 transition-all duration-200 hover:scale-105 inline-block pt-10 pl-2" href="/">[ home ]</Link>
+                    <div className="flex gap-4 pt-10 pl-2">
+                        <button className="hover:text-lime-400/75 transition-all duration-200 hover:scale-105" onClick={reset}>[ retry ]</button>
+                        <Link className="hover:text-lime-400/75 transition-all duration-200 hover:scale-105" href="/">[ home ]</Link>
+                    </div>
                 )}
             </div>
         </div>
