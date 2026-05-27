@@ -27,7 +27,7 @@ export default function Layout({
                     <Background />
                     <Navbar />
                     <div className="relative flex flex-col overflow-y-auto h-full overflow-x-hidden px-4 sm:px-8">
-                        <main className="py-5 font-mono mx-auto max-w-4xl w-4xl">{children}</main>
+                        <main className="py-5 font-mono mx-auto max-w-4xl w-full">{children}</main>
                         <p className="grow"></p>
                         <Footer />
                     </div>

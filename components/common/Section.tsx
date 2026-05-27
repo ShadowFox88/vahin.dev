@@ -12,11 +12,11 @@ export default function section({ index, label, heading, children }: SectionProp
 
     return (
         <section className="flex flex-col relative pb-5" style={{ minHeight: `${renderedLabel.length}ch` }}>
-            <p className="uppercase tracking-widest text-amber-600/50 text-xs absolute -z-10 whitespace-nowrap rotate-270 origin-top-right right-[calc(100%+25px)] top-0">
+            <p className="uppercase tracking-widest text-amber-600/50 text-xs sm:absolute sm:-z-10 sm:whitespace-nowrap sm:rotate-270 sm:origin-top-right sm:right-[calc(100%+25px)] sm:top-0 mb-1 sm:mb-0">
                 {index}&nbsp;&nbsp;•&nbsp;&nbsp;{label}
             </p>
             <h1 className="block uppercase tracking-widest underline underline-offset-8 line-clamp-1 pb-5 text-amber-400/70 text-xs">
-        // {heading}&nbsp;
+                // {heading}&nbsp;
             </h1>
             {children}
         </section>

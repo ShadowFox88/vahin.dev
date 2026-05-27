@@ -2,7 +2,7 @@ import { FRIENDS } from "@/utils/contants";
 
 export default function Friends() {
     return (
-        <div className="pt-2 pb-8 flex gap-3 w-full max-w-4xl">
+        <div className="pt-2 pb-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 w-full">
             {FRIENDS.map((friend) =>
                 <a
                     href={friend.site}

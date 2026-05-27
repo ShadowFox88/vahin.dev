@@ -36,7 +36,7 @@ export default function BlogPosts({ number }: BlogPostsProps) {
     }
 
     return (
-        <div className="pt-2 pb-8 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 w-4xl">
+        <div className="pt-2 pb-8 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 w-full">
             {posts.map((post) =>
                 <a
                     key={`${[post.filename]}_blog_entry`}

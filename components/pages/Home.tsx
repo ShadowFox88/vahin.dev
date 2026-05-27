@@ -22,13 +22,13 @@ export async function Home() {
                         src={avatar.src}
                         quality={75}
                         alt="profile pic"
-                        className="mr-5"
+                        className="mr-5 shrink-0 w-16 h-16 sm:w-24 sm:h-24"
                     />
                     <div>
                         <p className="text-2xl text-amber-400/80">Vahin</p>
                         <br />
                         <p className="leading-relaxed text-amber-600/40">
-                            I am a 17 year old developer from the UK who likes coding as a hobby.
+                            I am a developer from the UK who likes coding as a hobby.
                         </p>
                     </div>
                 </div>

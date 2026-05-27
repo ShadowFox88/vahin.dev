@@ -10,7 +10,7 @@ export default async function Services() {
     })));
 
     return (
-        <div className="pt-2 pb-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 w-4xl">
+        <div className="pt-2 pb-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 w-full">
             {results.map(({ service, online }) =>
                 <a
                     href={service.url}
@@ -25,7 +25,7 @@ export default async function Services() {
                     <div className="w-10 h-10 overflow-hidden shrink-0 flex">
                         {service.icon}
                     </div>
-                    <div className="gap-0.5 w-full">
+                    <div className="gap-0.5 min-w-0 flex-1">
                         <p className="text-amber-600/40 text-[10px] uppercase tracking-widest flex gap-1">
                             // service
                         </p>
@@ -44,7 +44,7 @@ export default async function Services() {
                             </span>
                         </p>
                     </div>
-                    <p className="ml-auto text-amber-600/30 group-hover:text-amber-500/60 text-xs transition-all duration-200 self-center">
+                    <p className="ml-auto shrink-0 text-amber-600/30 group-hover:text-amber-500/60 text-xs transition-all duration-200 self-center">
                         →
                     </p>
                 </a>
