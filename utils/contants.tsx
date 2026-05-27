@@ -81,7 +81,7 @@ export const SOCIALS: { name: string; href: string; icon: React.ReactNode, usern
             <path d="M15 17.4286C15 16.9552 15.3838 16.5714 15.8571 16.5714H20.1429C20.6162 16.5714 21 16.9552 21 17.4286V19.1429C21 19.6162 20.6162 20 20.1429 20H15.8571C15.3838 20 15 19.6162 15 19.1429V17.4286Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M16.7143 15.2857C16.7143 14.5756 17.2899 14 18 14C18.7101 14 19.2857 14.5756 19.2857 15.2857V16.5714H16.7143V15.2857Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>,
-        username: PGP_FINGERPRINT,
+        username: "view key", // yes i know this isn't a username but im not changing everything for one damn thing.
     },
 ];
 

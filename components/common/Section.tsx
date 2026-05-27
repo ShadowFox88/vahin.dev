@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { ScrambleText } from './TextEffects'
+
 interface SectionProps {
     index: string        // the number
     label: string        // the rotated bit
@@ -15,8 +17,8 @@ export default function section({ index, label, heading, children }: SectionProp
             <p className="uppercase tracking-widest text-amber-600/50 text-xs sm:absolute sm:-z-10 sm:whitespace-nowrap sm:rotate-270 sm:origin-top-right sm:right-[calc(100%+25px)] sm:top-0 mb-1 sm:mb-0">
                 {index}&nbsp;&nbsp;•&nbsp;&nbsp;{label}
             </p>
-            <h1 className="block uppercase tracking-widest underline underline-offset-8 line-clamp-1 pb-5 text-amber-400/70 text-xs">
-                // {heading}&nbsp;
+            <h1 className="block uppercase tracking-widest underline underline-offset-8 pb-5 text-amber-400/70 text-xs">
+                // <ScrambleText text={heading} />&nbsp;
             </h1>
             {children}
         </section>

@@ -64,11 +64,11 @@ export async function Commits({ username, repo }: CommitsProps) {
     return (
         <ul>
             {last5Commits.map((c) =>
-                <li key={`${c.sha}`} className="flex gap-3">
+                <li key={`${c.sha}`} className="flex gap-3 items-center">
                     <a href={c.html_url}>
                         <p className="text-amber-400/80 uppercase tracking-widest text-sm transition-all duration-200 hover:scale-105 hover:animate-pulse underline underline-offset-4">{c.sha.slice(0, 8)}</p>
                     </a>
-                    <p className="text-sm text-amber-600/40">{new Date(Date.parse(c.author.date)).toISOString().split('T')[0]}</p>
+                    <p className="text-xs text-amber-600/40">{new Date(Date.parse(c.author.date)).toISOString().split('T')[0]}</p>
                     <p className="text-xs truncate ">{c.message.split("\n")[0]}</p>
                 </li>
             )}
