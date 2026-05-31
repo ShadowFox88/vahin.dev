@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import Section from "../common/Section";
-import BlogPosts from "../common/BlogPosts";
+import Posts from "../common/Posts";
 
 import { PinnedRepositories, Commits } from "../common/Github";
 
@@ -47,7 +47,7 @@ export async function Home() {
             </Section>
 
             <Section index="05" label="blog posts" heading="my thoughts">
-                <BlogPosts number={3} />
+                <Posts type="blog" number={3} />
             </Section>
 
             <Section index="06" label="Links" heading="services i host">
