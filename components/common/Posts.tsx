@@ -20,6 +20,7 @@ type Post = {
     description: string;
     created: Date;
     readTime: number;
+    subsection?: string;
 }
 
 const fmt = (d: Date) => new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(d);
@@ -55,11 +56,42 @@ function readPost(filePath: string, href: string, label: string, subject: string
         description: data.description ?? description?.trim(),
         created: data.created ? new Date(data.created) : new Date(0),
         readTime: Math.ceil(content.split(/\s+/).length / 200),
+        subsection: data.subsection,
     };
+}
+
+function NoteGrid({ posts, showViewAll, subj }: { posts: Post[], showViewAll?: boolean, subj: string }) {
+    return (
+        <>
+            {posts.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-16 gap-3">
+                    <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M32,8 L56,52 Q57,54 55,54 L9,54 Q7,54 8,52 Z" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+                        <line x1="32" y1="24" x2="32" y2="38" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" />
+                        <circle cx="32" cy="46" r="2" fill="#ef4444" />
+                    </svg>
+                    <p className="text-amber-600/40 text-xs uppercase tracking-widest">// no notes yet</p>
+                </div>
+            ) : (
+                <>
+                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 pb-4">
+                        {posts.map(post => <Card key={post.href} post={post} />)}
+                    </div>
+                    {showViewAll && (
+                        <a href={`/notes/${subj}`} className="text-amber-600/40 hover:text-amber-500/60 text-[10px] uppercase tracking-widest transition-all duration-200 pb-8 inline-block">
+                            // view all →
+                        </a>
+                    )}
+                </>
+            )}
+        </>
+    );
 }
 
 export default function Posts({ type, subject, number }: PostsProps) {
     const base = path.join(process.cwd(), 'public', type === 'blog' ? 'blog_posts' : 'notes');
+
+    if (!fs.existsSync(base)) return <div />;
 
     if (type === 'blog') {
         let posts = fs.readdirSync(base)
@@ -78,10 +110,12 @@ export default function Posts({ type, subject, number }: PostsProps) {
 
     const subjects = subject
         ? [subject]
-        : fs.readdirSync(base).filter(f => fs.statSync(path.join(base, f)).isDirectory()).sort();
+        : fs.existsSync(base)
+            ? fs.readdirSync(base).filter(f => fs.statSync(path.join(base, f)).isDirectory()).sort()
+            : [];
 
     const groups = subjects.map((subj, i) => {
-        const posts = fs.readdirSync(path.join(base, subj))
+        let posts = fs.readdirSync(path.join(base, subj))
             .filter(f => f.endsWith('.md'))
             .map(file => readPost(
                 path.join(base, subj, file),
@@ -90,34 +124,46 @@ export default function Posts({ type, subject, number }: PostsProps) {
                 subj
             ))
             .sort((a, b) => b.created.getTime() - a.created.getTime());
+
+        if (typeof number === 'number') posts = posts.slice(0, number);
+
         return { subj, posts, index: String(i + 1).padStart(2, '0') };
     });
+
+
+    if (subject) {
+        const { posts } = groups[0];
+        const unsectioned = posts.filter(p => !p.subsection);
+        const subsections = [...new Set(posts.filter(p => p.subsection).map(p => p.subsection!))]
+            .sort();
+
+        return (
+            <div className="pt-2 pb-8 flex flex-col w-full">
+                {unsectioned.length > 0 && (
+                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 pb-8">
+                        {unsectioned.map(post => <Card key={post.href} post={post} />)}
+                    </div>
+                )}
+                {subsections.map((sub, i) => {
+                    const subPosts = posts.filter(p => p.subsection === sub);
+                    return (
+                        <Section key={sub} index={String(i + 1).padStart(2, '0')} label={sub.replace(/-/g, ' ')} heading={sub.replace(/-/g, ' ')}>
+                            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 pb-8">
+                                {subPosts.map(post => <Card key={post.href} post={post} />)}
+                            </div>
+                        </Section>
+                    );
+                })}
+            </div>
+        );
+    }
+
 
     return (
         <div className="pt-2 pb-8 flex flex-col w-full">
             {groups.map(({ subj, posts, index }) => (
                 <Section key={subj} index={index} label={subj.replace(/-/g, ' ')} heading={subj.replace(/-/g, ' ')}>
-                    {posts.length === 0 ? (
-                        <div className="flex flex-col items-center justify-center py-16 gap-3">
-                            <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M32,8 L56,52 Q57,54 55,54 L9,54 Q7,54 8,52 Z" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
-                                <line x1="32" y1="24" x2="32" y2="38" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" />
-                                <circle cx="32" cy="46" r="2" fill="#ef4444" />
-                            </svg>
-                            <p className="text-amber-500/60 text-xs uppercase tracking-widest">// no notes yet</p>
-                        </div>
-                    ) : (
-                        <>
-                            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 pb-4">
-                                {posts.map(post => <Card key={post.href} post={post} />)}
-                            </div>
-                            {number && (
-                                <a href={`/notes/${subj}`} className="text-amber-600/40 hover:text-amber-500/60 text-[10px] uppercase tracking-widest transition-all duration-200 pb-8 inline-block">
-                                    // view all →
-                                </a>
-                            )}
-                        </>
-                    )}
+                    <NoteGrid posts={posts} showViewAll={number ? true : false} subj={subj} />
                 </Section>
             ))}
         </div>

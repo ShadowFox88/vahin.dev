@@ -3,6 +3,8 @@ title: Simultaneous Equations and Matrices
 description: How to solve simultaneous equations using matrices
 slug: simultaneous-equations-and-matrices
 
+subsection: pure
+
 created: 2026-02-09
 updated: 2026-05-31
 ---
@@ -51,10 +53,10 @@ This gives us the matrix equation $AB = C$. Our goal is to solve for $B$, which 
 Multiplying both sides on the left by $A^{-1}$:
 
 $$
-\begin{align*}
+\begin{aligned}
 A^{-1}AB &= A^{-1}C \\
 B &= A^{-1}C
-\end{align*}
+\end{aligned}
 $$
 
 ## Solving
@@ -62,7 +64,7 @@ $$
 Using the method for finding the inverse of a $3 \times 3$ matrix:
 
 $$
-\begin{align*}
+\begin{aligned}
 A^{-1} &= \frac{1}{189}\begin{bmatrix}
 7 & 36 & 10 \\
 28 & 9 & 13 \\
@@ -75,7 +77,7 @@ A^{-1} &= \frac{1}{189}\begin{bmatrix}
 \end{bmatrix}
 \begin{bmatrix} 21 \\ -16 \\ 24 \end{bmatrix} \\[10pt]
 &= \begin{bmatrix} -1 \\ 4 \\ 2 \end{bmatrix}
-\end{align*}
+\end{aligned}
 $$
 
 Therefore $x = -1$, $y = 4$, and $z = 2$.
