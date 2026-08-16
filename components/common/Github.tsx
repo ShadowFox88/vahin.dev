@@ -103,9 +103,6 @@ function getMainLanguage(languages?: Language[]) {
 export async function Repositories({ username }: RepositoryProps) {
     const { Repositories } = await getGithubResponse();
 
-    Repositories[0].IsArchived = true;
-    Repositories[0].IsFork = true;
-
     return (
         <div className="grid-cols-3 gap-3 grid">
             {Repositories.map((repo) => {
