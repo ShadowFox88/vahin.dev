@@ -1,38 +1,12 @@
-import { Repository, Commit, ReturnedCommit } from "./types";
-import { GITHUB_API_VERSION, GITHUB_TOKEN, USER_AGENT } from "@/utils/contants";
+import { GitHubCommit, Response } from "./types";
 
-const BASE_URL = "https://api.github.com";
+const MICROSERVICE_URL = "https://nymph.vahin.dev/api/github";
+const GITHUB_API_URL = "https://api.github.com/repos";
 
-const QUERY = `
-query($username: String!) {
-    user(login: $username) {
-        pinnedItems(first: 6, types: REPOSITORY) {
-            nodes {
-                ... on Repository {
-                    id
-                    name
-                    owner {
-                        login
-                    } 
-                }
-            }
-        }
-    }
-}
-`;
-
-export async function getRepository(
-    owner: string,
-    repo: string,
-): Promise<Repository> {
-    const req = await fetch(`${BASE_URL}/repos/${owner}/${repo}`, {
-        headers: {
-            "User-Agent": USER_AGENT,
-            "X-GitHub-Api-Version": GITHUB_API_VERSION,
-            Authorization: `Bearer ${GITHUB_TOKEN}`,
-        },
+export async function getGithubResponse(): Promise<Response> {
+    const req = await fetch(MICROSERVICE_URL, {
         next: {
-            revalidate: 60 * 60 * 24, // revalidate every day
+            revalidate: 60 * 60 * 0.5, // revalidate every 30 mins
         },
     });
 
@@ -43,135 +17,38 @@ export async function getRepository(
     return req.json();
 }
 
-function getNextLink(linkHeader: string | null): string | null {
-    if (!linkHeader) return null;
-    const match = linkHeader.match(/<([^>]+)>\s*;\s*rel="next"/);
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-    return match?.[1] ?? null;
-}
-
-export async function getRepositories(username: string): Promise<Repository[]> {
-    const req = await fetch(`${BASE_URL}/users/${username}/repos?sort=pushed`, {
-        headers: {
-            "User-Agent": USER_AGENT,
-            "X-GitHub-Api-Version": GITHUB_API_VERSION,
-            Authorization: `Bearer ${GITHUB_TOKEN}`,
-        },
-        next: {
-            revalidate: 60 * 60 * 24, // revalidate every day
-        },
-    });
-
-    if (!req.ok) {
-        throw new Error(`${req.status}: ${req.statusText}`);
-    }
-
-    let repos: Repository[] = await req.json();
-
-    let link = req.headers.get("link");
-
-    if (link === null) {
-        return repos;
-    }
+export async function getLast5Commits(owner: string, repo: string): Promise<GitHubCommit[]> {
+    const url = `${GITHUB_API_URL}/${owner}/${repo}/commits?per_page=5`;
 
     while (true) {
-        let next = getNextLink(link)
-
-        if (next === null) {
-            break
-        }
-
-        const req = await fetch(next, {
-            headers: {
-                "User-Agent": USER_AGENT,
-                "X-GitHub-Api-Version": GITHUB_API_VERSION,
-                Authorization: `Bearer ${GITHUB_TOKEN}`,
-            },
-            next: {
-                revalidate: 60 * 60 * 24, // revalidate every day
-            },
+        const req = await fetch(url, {
+            cache: "force-cache", // fetch once at build time, cache forever
         });
 
-        if (!req.ok) {
-            throw new Error(`${req.status}: ${req.statusText}`);
+        if (req.ok) {
+            return req.json();
         }
 
-        repos.push(...await req.json());
+        if (req.status === 403 || req.status === 429) {
+            const reset = req.headers.get("X-RateLimit-Reset");
+            const retryAfter = req.headers.get("Retry-After");
 
-        link = req.headers.get("link");
+            if (reset) {
+                const waitMs = Number(reset) * 1000 - Date.now() + 1000;
+                if (waitMs > 0) {
+                    await wait(waitMs);
+                    continue;
+                }
+            }
 
-        if (link === null) {
-            break
+            if (retryAfter) {
+                await wait(Number(retryAfter) * 1000);
+                continue;
+            }
         }
-    }
 
-    return repos
-}
-
-export async function getPinnedRepositories(
-    username: string,
-): Promise<Repository[]> {
-    const req = await fetch("https://api.github.com/graphql", {
-        method: "POST",
-        headers: {
-            "User-Agent": USER_AGENT,
-            Authorization: `Bearer ${GITHUB_TOKEN}`,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            query: QUERY,
-            variables: {
-                username,
-            },
-        }),
-        next: {
-            revalidate: 60 * 60 * 1, // revalidate every hour
-        },
-    });
-
-    if (!req.ok) {
         throw new Error(`${req.status}: ${req.statusText}`);
     }
-
-    const json = await req.json();
-
-    if (!json.data?.user?.pinnedItems?.nodes) {
-        return [];
-    }
-
-    const repos = [];
-
-    for (const repo of json.data.user.pinnedItems.nodes) {
-        repos.push(await getRepository(repo.owner.login, repo.name));
-    } // double fetch because i hate graphql and i made my type for the REST api and i don't wanna do it again
-
-    return repos;
-}
-
-export async function getTop5Commits(repo: Repository): Promise<Commit[]> {
-    const req = await fetch(repo.commits_url.replace("{/sha}", ""), {
-        headers: {
-            "User-Agent": USER_AGENT,
-            "X-GitHub-Api-Version": GITHUB_API_VERSION,
-            Authorization: `Bearer ${GITHUB_TOKEN}`,
-        },
-        next: {
-            revalidate: 60 * 60 * 24, // revalidate every day
-        },
-    });
-
-    if (!req.ok) {
-        throw new Error(`${req.status}: ${req.statusText}`);
-    }
-
-    const commits = await req.json();
-
-    return commits.slice(0, 5).map((c: ReturnedCommit) => ({
-        sha: c.sha,
-        author: c.commit.author,
-        committer: c.commit.committer,
-        message: c.commit.message,
-        verification: c.commit.verification,
-        html_url: c.html_url,
-    }));
 }

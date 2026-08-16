@@ -50,11 +50,7 @@ export async function Home() {
                 <Posts type="blog" number={3} />
             </Section>
 
-            <Section index="06" label="Links" heading="services i host">
-                <Services />
-            </Section>
-
-            <Section index="07" label="log" heading="commit log · recent">
+            <Section index="06" label="log" heading="commit log · recent">
                 <Commits username="shadowfox88" repo="vahin.dev" />
             </Section>
         </div>

@@ -1,66 +1,52 @@
+type Repository = {
+    CreatedAt: string;
+    Description: string;
+    Forks: number;
+    ID: string;
+    Name: string;
+    Owner: Owner;
+    IsArchived: boolean;
+    IsFork: boolean;
+    License: License | null;
+    Languages: Language[];
+    StargazerCount: number;
+    URL: string;
+}
+
 type Owner = {
-    login: string;
-    id: number;
-    avatar_url: string;
-    html_url: string;
-    type: string;
-    user_view_type: "public";
+    Name: string;
+    URL: string;
 }
 
 type License = {
-    key: string;
-    name: string;
-    spdx_id: string;
-    url: string;
+    Name: string;
+    Nickname: string;
+    Key: string;
 }
 
-
-export type Repository = {
-    id: number;
-    name: string;
-    full_name: string;
-    private: boolean;
-    owner: Owner;
-    html_url: string;
-    description: string;
-    fork: boolean;
-    created_at: string;
-    updated_at: string;
-    pushed_at: string;
-    homepage: string;
-    size: string;
-    stargazers_count: number;
-    watchers_count: number;
-    language?: string;
-    forks_count: number;
-    archived: boolean;
-    commits_url: string;
+export type Language = {
+    Name: string;
+    Colour: string;
+    Size: number;
+    Percentage: number;
 }
 
-export type CommitUser = {
-    name: string;
-    email: string;
-    date: string;
+export type Response = {
+    Repositories: Repository[];
+    PinnedRepositories: Repository[];
+    TotalCount: number;
+    HasNextPage: boolean;
+    EndCursor: string;
+    Date: string;
 }
 
-export type CommitVerification = {
-    verified: boolean;
-    reason: string;
-    verified_at: string;
-    // we don't care about signature or payload tbh - let github handle it
-}
-
-export type Commit = {
+export type GitHubCommit = {
     sha: string;
-    author: CommitUser;
-    committer: CommitUser;
-    message: string;
-    verification: CommitVerification;
     html_url: string;
-}
-
-export type ReturnedCommit = {
-    sha: string;
-    commit: Omit<Commit, "sha" | "html_url">;
-    html_url: string;
+    commit: {
+        author: {
+            date: string;
+        };
+        message: string;
+    };
 }
