@@ -13,7 +13,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.45",
-    "next": "16.2.3",
+    "next": "16.2.11",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "rehype-katex": "^7.0.1",
