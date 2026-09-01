@@ -8,11 +8,11 @@ import { getServices, getServiceHistory, HistoryOutage, ServiceStatus, ServiceUp
 
 const REFRESH_MS = 60_000;
 
-const UPTIME_TIERS: { min: number; color: string; text: string }[] = [
-    { min: 100, color: "bg-emerald-600/70", text: "text-emerald-400" },
-    { min: 99.0, color: "bg-lime-600/60", text: "text-lime-400" },
-    { min: 90.0, color: "bg-amber-600/60", text: "text-amber-400" },
-    { min: 0.0, color: "bg-red-700/60", text: "text-red-400" },
+const UPTIME_TIERS: { min: number; color: string; text: string; label: string }[] = [
+    { min: 99.0, color: "bg-emerald-600/70", text: "text-emerald-400", label: "up" },
+    { min: 97.0, color: "bg-lime-600/60", text: "text-lime-400", label: "healthy" },
+    { min: 90.0, color: "bg-amber-600/60", text: "text-amber-400", label: "minor" },
+    { min: 0.0, color: "bg-red-700/60", text: "text-red-400", label: "major" },
 ];
 
 function formatClock(date: Date): string {
@@ -119,6 +119,15 @@ function overallUptime(entry: ServiceUptime): number | null {
     return days.reduce((sum, day) => sum + (day.percentage as number) / 100, 0) / days.length;
 }
 
+function outageCount(entry: ServiceUptime | undefined): number {
+    if (!entry) return 0;
+    const days = entry.days;
+    if (days.every((day) => day.outage_count !== undefined)) {
+        return days.reduce((sum, day) => sum + (day.outage_count ?? 0), 0);
+    }
+    return days.filter((day) => day.percentage !== null && day.percentage < 100).length;
+}
+
 function formatDuration(ms: number): string {
     const hours = Math.floor(ms / 3_600_000);
     const mins = Math.floor((ms % 3_600_000) / 60_000);
@@ -137,6 +146,8 @@ function UptimeHistory({ services, history }: { services: ServiceStatus[] | null
         date: string;
         percent: number | null;
         outages: HistoryOutage[] | null;
+        outageCount: number | null;
+        outageTotalDuration: number | null;
         serviceName: string;
     } | null>(null);
 
@@ -148,8 +159,24 @@ function UptimeHistory({ services, history }: { services: ServiceStatus[] | null
         );
     }
 
-    const historyMap = new Map(history?.map((entry) => [entry.service, entry]));
-    const firstEntry = history?.find((entry) => entry.days.length > 0);
+    if (!history) {
+        return (
+            <p className="pt-2 pb-8 text-amber-600/40 text-xs uppercase tracking-widest">
+                {"// history unavailable"}
+            </p>
+        );
+    }
+
+    if (history.length === 0) {
+        return (
+            <p className="pt-2 pb-8 text-amber-600/40 text-xs uppercase tracking-widest">
+                {"// no uptime data reported"}
+            </p>
+        );
+    }
+
+    const historyMap = new Map(history.map((entry) => [entry.service, entry]));
+    const firstEntry = history.find((entry) => entry.days.length > 0);
     const firstDay = firstEntry?.days[0]?.date;
     const lastDay = firstEntry?.days[firstEntry.days.length - 1]?.date;
 
@@ -161,6 +188,8 @@ function UptimeHistory({ services, history }: { services: ServiceStatus[] | null
             date: day.date,
             percent: day.percentage,
             outages: day.top_outages,
+            outageCount: day.outage_count ?? null,
+            outageTotalDuration: day.outage_total_duration ?? null,
             serviceName,
         });
     };
@@ -195,18 +224,23 @@ function UptimeHistory({ services, history }: { services: ServiceStatus[] | null
                         <p className="text-amber-400/80 text-xs tracking-wider uppercase truncate w-28 shrink-0 group-hover:text-amber-300/80 transition-colors">
                             {service.name}
                         </p>
-                        <div className="flex gap-px flex-1 min-w-0">
+                        <div className="flex flex-1 min-w-0">
                             {(entry?.days ?? []).map((day) =>
                                 <span
                                     key={day.date}
                                     onMouseEnter={(e) => handleEnter(e, day, service.name)}
                                     onMouseLeave={handleLeave}
-                                    className={`flex-1 h-6 shrink-0 rounded-[1px] cursor-default transition-all hover:opacity-80 hover:-translate-y-0.5 ${cellColor(day.percentage)}`}
+                                    className={`flex-1 h-7 shrink-0 rounded-[1px] cursor-default transition-all hover:opacity-80 hover:-translate-y-1.5 ${cellColor(day.percentage)}`}
                                 />
                             )}
                         </div>
-                        <p className="ml-auto shrink-0 w-16 text-right text-amber-400 text-[10px] font-bold tabular-nums">
+                        <p className="ml-auto shrink-0 w-20 text-right text-amber-400 text-[10px] font-bold tabular-nums leading-tight">
                             {entry ? `${overallUptime(entry)?.toFixed(1) ?? "--"}%` : "--"}
+                            {entry && (
+                                <span className="block text-amber-600/50 text-[9px]">
+                                    {outageCount(entry)} total outage{outageCount(entry) !== 1 ? "s" : ""}
+                                </span>
+                            )}
                         </p>
                     </div>
                 );
@@ -215,8 +249,8 @@ function UptimeHistory({ services, history }: { services: ServiceStatus[] | null
             <div className="flex items-center gap-3 pt-1">
                 <LegendItem color="bg-emerald-600/70" label="up" />
                 <LegendItem color="bg-lime-600/60" label="healthy" />
-                <LegendItem color="bg-amber-600/60" label="degraded" />
-                <LegendItem color="bg-red-700/60" label="down" />
+                <LegendItem color="bg-amber-600/60" label="minor" />
+                <LegendItem color="bg-red-700/60" label="major" />
                 <LegendItem color="bg-neutral-800/60" label="no data" />
             </div>
 
@@ -225,19 +259,24 @@ function UptimeHistory({ services, history }: { services: ServiceStatus[] | null
                     className="fixed z-50 pointer-events-none transition-opacity duration-100"
                     style={{
                         left: tooltip.x,
-                        top: tooltip.y - 8,
+                        top: tooltip.y - 14,
                         transform: "translate(-50%, -100%)",
                     }}
                 >
                     <div className="bg-black border border-amber-600/40 rounded-sm px-3 py-2 font-mono shadow-lg shadow-black/50">
-                        <p className="text-amber-500 text-[10px] font-bold uppercase tracking-wider">
+                        <p className="text-sky-400 text-[10px] font-bold uppercase tracking-wider">
                             {tooltip.serviceName}
                         </p>
-                        <p className="text-amber-400 text-[10px] font-bold tracking-wider mt-0.5">
+                        <p className="text-fuchsia-400 text-[10px] font-bold tracking-wider mt-0.5">
                             {new Date(tooltip.date).toLocaleDateString("en-GB", { month: "short", day: "numeric", year: "numeric" })}
                         </p>
                         <p className={`text-[10px] font-bold tracking-wider mt-0.5 ${percentTier(tooltip.percent)?.text ?? "text-neutral-400"}`}>
                             {tooltip.percent === null ? "no data" : `${(tooltip.percent / 100).toFixed(1)}% uptime`}
+                            {tooltip.outageTotalDuration !== null && tooltip.outageTotalDuration > 0 && (
+                                <span className="text-amber-600/40">
+                                    {" "}· {formatDuration(tooltip.outageTotalDuration)} downtime
+                                </span>
+                            )}
                         </p>
                         {tooltip.outages && tooltip.outages.length > 0 && (
                             <>
@@ -258,6 +297,20 @@ function UptimeHistory({ services, history }: { services: ServiceStatus[] | null
                                         </span>
                                     </p>
                                 ))}
+                                {(() => {
+                                    const shown = tooltip.outages.slice(0, 3);
+                                    const shownDur = shown.reduce((sum, o) => sum + o.duration_ms, 0);
+                                    const remaining = Math.max(0, (tooltip.outageCount ?? shown.length) - shown.length);
+                                    const remainingDur = Math.max(0, (tooltip.outageTotalDuration ?? 0) - shownDur);
+                                    if (remaining > 0 || remainingDur > 0) {
+                                        return (
+                                            <p className="text-amber-600/40 text-[10px] font-bold tracking-wider mt-0.5">
+                                                +{remaining} more · {formatDuration(remainingDur)} remaining
+                                            </p>
+                                        );
+                                    }
+                                    return null;
+                                })()}
                             </>
                         )}
                     </div>

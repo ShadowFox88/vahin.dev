@@ -40,6 +40,8 @@ export type ServiceUptimeDay = {
     date: string;
     percentage: number | null;
     top_outages: HistoryOutage[] | null;
+    outage_count?: number;
+    outage_total_duration?: number;
 };
 
 export type ServiceUptime = {

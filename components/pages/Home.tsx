@@ -1,12 +1,14 @@
 import Image from "next/image";
 
 import Section from "../common/Section";
-import Posts from "../common/Posts";
+import PostGrid from "../common/Posts";
 
 import { PinnedRepositories, Commits } from "../common/Github";
 
 import Friends from "../common/Friends";
 import Socials from "../common/Socials";
+
+import { getBlogPosts } from '@/lib/content';
 
 import avatar from "@/public/images/avatar.png"
 
@@ -46,7 +48,7 @@ export async function Home() {
             </Section>
 
             <Section index="05" label="blog posts" heading="my thoughts">
-                <Posts type="blog" number={3} />
+                <PostGrid posts={getBlogPosts(3)} />
             </Section>
 
             <Section index="06" label="log" heading="commit log · recent">
