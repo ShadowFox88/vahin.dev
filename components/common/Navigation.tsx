@@ -6,8 +6,8 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 
 export function Navbar() {
-    const pages = ["home", "blog", "projects", "notes"];
-    const paths = ["/", "/blog", "/projects", "/notes"];
+    const pages = ["home", "blog", "projects", "notes", "status"];
+    const paths = ["/", "/blog", "/projects", "/notes", "/status"];
     const numbers = Object.keys(pages).map((index: string) => Number(index))
     const blueIndex = paths.indexOf(usePathname())
     const [open, setOpen] = useState(false)

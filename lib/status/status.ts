@@ -1,36 +1,75 @@
-import { STATUS_TOKEN } from "@/utils/contants";
-import { JSX } from "react";
+export type ServiceStatus = {
+    name: string;
+    online: boolean;
+    fetchedAt: string;
+};
 
-async function getStatus(service: string): Promise<boolean> {
-    const req = await fetch(`https://status.vahin.dev/status?service=${service}`, {
-        headers: {
-            Authorization: `Bearer ${STATUS_TOKEN}`,
-        },
-        next: {
-            revalidate: 60,
-        },
+type ServicesResponse = Record<string, {
+    Name: string;
+    Online: boolean;
+    FetchedAt: string;
+}>;
+
+export async function getServices(): Promise<ServiceStatus[]> {
+    const req = await fetch("https://nymph.vahin.dev/api/services", {
+        cache: "no-store",
     });
 
     if (!req.ok) {
-        return false
+        throw new Error(`${req.status}: ${req.statusText}`);
     }
 
-    const status = await req.json();
+    const data = await req.json() as ServicesResponse;
 
-    return status.online;
+    return Object.values(data)
+        .map(({ Name, Online, FetchedAt }) => ({
+            name: Name,
+            online: Online,
+            fetchedAt: FetchedAt,
+        }))
+        .sort((a, b) => a.name.localeCompare(b.name));
 }
 
+export type HistoryOutage = {
+    start: string;
+    end: string;
+    duration_ms: number;
+};
 
-export async function isOnline(service: {name: string, url: string, icon: JSX.Element, tailscale: boolean}): Promise<boolean> {
-    if (service.tailscale) {
-        return getStatus(service.name)
+export type ServiceUptimeDay = {
+    date: string;
+    percentage: number | null;
+    top_outages: HistoryOutage[] | null;
+};
+
+export type ServiceUptime = {
+    service: string;
+    days: ServiceUptimeDay[];
+};
+
+export async function getServiceHistory(days: number): Promise<ServiceUptime[] | null> {
+    try {
+        const params = new URLSearchParams();
+        params.set("days", String(days));
+
+        const req = await fetch(
+            `https://nymph.vahin.dev/api/services/history?${params}`,
+            { cache: "no-store" },
+        );
+
+        if (!req.ok) {
+            return null;
+        }
+
+        const data = await req.json() as ServiceUptime[];
+
+        return data
+            .map((entry) => ({
+                service: entry.service,
+                days: [...entry.days].sort((a, b) => a.date.localeCompare(b.date)),
+            }))
+            .sort((a, b) => a.service.localeCompare(b.service));
+    } catch {
+        return null;
     }
-
-    const req = await fetch(service.url, {
-        next: {
-            revalidate: 60,
-        },
-    })
-
-    return req.status < 500;
 }

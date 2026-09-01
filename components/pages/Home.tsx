@@ -7,7 +7,6 @@ import { PinnedRepositories, Commits } from "../common/Github";
 
 import Friends from "../common/Friends";
 import Socials from "../common/Socials";
-import Services from "../common/Services"
 
 import avatar from "@/public/images/avatar.png"
 
