@@ -224,7 +224,7 @@ function UptimeHistory({ services, history }: { services: ServiceStatus[] | null
                         <p className="text-amber-400/80 text-xs tracking-wider uppercase truncate w-28 shrink-0 group-hover:text-amber-300/80 transition-colors">
                             {service.name}
                         </p>
-                        <div className="flex flex-1 min-w-0">
+                        <div className="flex flex-1 min-w-0 gap-px">
                             {(entry?.days ?? []).map((day) =>
                                 <span
                                     key={day.date}
